@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demander un devis · Distributeur de vape Dreamzz</title>
+<meta name="description" content="Demandez votre devis pour un distributeur de vape à la marque de votre magasin. Réponse sous 24 h.">
+<link rel="canonical" href="https://dreamzz.fr/devis">
+<meta name="theme-color" content="#06071A">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Dreamzz">
+<meta property="og:title" content="Demander un devis · Distributeur de vape Dreamzz">
+<meta property="og:description" content="Demandez votre devis pour un distributeur de vape à la marque de votre magasin. Réponse sous 24 h.">
+<meta property="og:url" content="https://dreamzz.fr/devis">
+<meta property="og:image" content="https://dreamzz.fr/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="48x48" href="/img/favicon-48.png">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+<link rel="preload" href="/fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/barlow-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Dreamzz, accueil"><img src="/img/logo.webp" alt="dreamzz vape" width="124" height="36"></a>
+    <nav class="nav" id="nav" aria-label="Menu principal">
+      <a href="/distributeur">Le distributeur</a>
+      <a href="/votre-marque">Votre marque</a>
+      <a href="/offres">Offres</a>
+      <a href="/pour-qui">Pour qui</a>
+      <a href="/faq">FAQ</a>
+      <a class="btn btn-nav" href="/devis">Demander un devis</a>
+    </nav>
+    <a class="btn" href="/devis">Demander un devis</a>
+    <button class="burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+<main id="contenu">
+
+<section class="dark page-hero" style="padding-bottom:64px">
+  <div class="glow glow-pink"></div><div class="glow glow-violet"></div>
+  <div class="wrap rel">
+    <p class="kicker">Devis gratuit</p>
+    <h1>Demander <span class="accent">un devis.</span></h1>
+    <p class="lead">Réponse sous 24 h.</p>
+  </div>
+</section>
+<section class="light sec" style="padding-top:56px">
+  <div class="wrap form-grid">
+    <form class="form" id="devis" action="https://gestion.dreamzz.fr/api/devis" method="post" novalidate>
+      <div class="field full"><label for="f-commerce">Nom du commerce</label><input id="f-commerce" name="commerce" required maxlength="120" autocomplete="organization"></div>
+      <div class="field full"><label for="f-type">Type de commerce</label>
+        <select id="f-type" name="type">
+          <option value="vape">Boutique de vape</option><option value="tabac">Tabac-presse</option><option value="epicerie">Épicerie de nuit</option>
+          <option value="lavage">Station de lavage</option><option value="bar">Bar / snack</option><option value="autre" selected>Autre</option>
+        </select></div>
+      <div class="field"><label for="f-ville">Ville</label><input id="f-ville" name="ville" required maxlength="80" autocomplete="address-level2"></div>
+      <div class="field"><label for="f-cp">Code postal</label><input id="f-cp" name="cp" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code"></div>
+      <div class="field"><label for="f-nom">Votre nom</label><input id="f-nom" name="nom" required maxlength="80" autocomplete="name"></div>
+      <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="tel" type="tel" required maxlength="30" autocomplete="tel" pattern="[0-9 +.()-]{9,30}"></div>
+      <div class="field full"><label for="f-email">E-mail <span class="opt">(facultatif)</span></label><input id="f-email" name="email" type="email" maxlength="120" autocomplete="email"></div>
+      <fieldset class="field full"><legend>Emplacement</legend><div class="choices"><label><input type="radio" name="emplacement" value="facade"> Façade</label><label><input type="radio" name="emplacement" value="interieur"> Intérieur</label><label><input type="radio" name="emplacement" value="nsp" checked> Je ne sais pas</label></div></fieldset>
+      <fieldset class="field full"><legend>Offre</legend><div class="choices"><label><input type="radio" name="offre" value="pack"> Pack marque</label><label><input type="radio" name="offre" value="location"> Machine + logiciel en location</label><label><input type="radio" name="offre" value="machine"> Machine seule</label><label><input type="radio" name="offre" value="nsp" checked> Je ne sais pas</label></div></fieldset>
+      <div class="field full"><label for="f-message">Message <span class="opt">(facultatif)</span></label><textarea id="f-message" name="message" maxlength="1500"></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="f-site">Site web</label><input id="f-site" name="site" tabindex="-1" autocomplete="off"></div>
+      <p class="legal">Vos coordonnées servent uniquement à vous recontacter pour ce devis. <a href="/confidentialite">Confidentialité</a></p>
+      <div class="form-actions"><button class="btn" type="submit">Envoyer ma demande</button><p class="form-msg" role="status" aria-live="polite"></p></div>
+    </form>
+    <aside class="side">
+      <div class="card"><p class="note">Par téléphone</p><a class="big" href="tel:+33767151793">07 67 15 17 93</a></div>
+      <div class="card"><p class="note">Par e-mail</p><a class="link" href="mailto:gestion@dreamzz.fr">gestion@dreamzz.fr</a></div>
+      <div class="card"><h3 style="margin:0 0 8px">Démo en visio</h3><p>Notre propre distributeur tourne déjà avec cette interface.</p></div>
+    </aside>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="/img/logo.webp" alt="dreamzz vape" width="117" height="34" loading="lazy">
+        <p>Distributeurs automatiques de vape à la marque des commerçants.</p>
+      </div>
+      <div>
+        <h3>Le site</h3>
+        <ul>
+          <li><a href="/distributeur">Le distributeur</a></li>
+          <li><a href="/votre-marque">Votre marque</a></li>
+          <li><a href="/offres">Offres</a></li>
+          <li><a href="/pour-qui">Pour qui</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/devis">Demander un devis</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+33767151793">07 67 15 17 93</a></li>
+          <li><a href="mailto:gestion@dreamzz.fr">gestion@dreamzz.fr</a></li>
+          <li>SAS Dreamzz · Lot-et-Garonne</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Dreamzz · <a href="/mentions-legales">Mentions légales</a> · <a href="/confidentialite">Confidentialité</a></span>
+      <span>Vente de produits du vapotage interdite aux mineurs.</span>
+    </div>
+  </div>
+</footer>
+<script src="/js/site.js" defer></script>
+</body>
+</html>
