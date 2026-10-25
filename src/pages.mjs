@@ -119,7 +119,7 @@ export function pages(mode) {
   // ---------------- Accueil ----------------
   out.push({
     file: 'index.html', slug: '',
-    title: 'Dreamzz · Distributeur de vape à la marque de votre magasin',
+    title: mode === 'preview' ? 'dreamzz.fr' : 'Dreamzz · Distributeur de vape à la marque de votre magasin',
     description: 'Distributeur automatique de vape mural, en façade ou en boutique, avec le nom et le logo de votre magasin à l’écran. Contrôle d’âge, paiement par carte, appli de gestion. Toutes les ventes sont pour vous.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org',
@@ -470,7 +470,7 @@ ${ctaBand(L)}`,
 </section>
 <section class="light sec" style="padding-top:56px">
   <div class="wrap form-grid">
-    <form class="form" id="devis" action="${SITE.devisApi}" method="post" novalidate>
+    <form class="form" id="devis" action="${SITE.devisApi}" method="post" novalidate${mode === 'preview' ? ' data-preview="1"' : ''}>
       <div class="field full"><label for="f-commerce">Nom du commerce</label><input id="f-commerce" name="commerce" required maxlength="120" autocomplete="organization"></div>
       <div class="field full"><label for="f-type">Type de commerce</label>
         <select id="f-type" name="type">

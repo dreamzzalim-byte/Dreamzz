@@ -29,6 +29,7 @@
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!form.reportValidity()) return;
+    if (form.dataset.preview) { msg.className = 'form-msg ok'; msg.textContent = 'Aperçu : l’envoi fonctionne sur dreamzz.fr.'; return; }
     msg.className = 'form-msg';
     msg.textContent = 'Envoi…';
     btn.disabled = true;
