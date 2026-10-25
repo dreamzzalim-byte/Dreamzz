@@ -270,6 +270,7 @@ fieldset.field{border:0;margin:0;padding:0}
   .facts div{padding:16px 0}
 }
 @media (min-width:901px){.nav .btn-nav{display:none}}
+.nav a.btn{color:var(--navy);margin-top:16px;padding:0 22px;border-bottom:0;font-size:17px}
 @media (max-width:600px){
   :root{--gut:16px}
   body{font-size:16px}
