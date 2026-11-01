@@ -12,6 +12,19 @@ export const SITE = {
   leasing: null,
 };
 
+// Le site a deux sections : Distributeurs (pages ci-dessous) et Labs (page /labs).
+// L'accueil (/) est le carrefour entre les deux.
+export const LABS = {
+  wa: 'https://wa.me/33767151793',
+  nav: [
+    { hash: 'packs', label: 'Packs design' },
+    { hash: 'digital', label: 'Sites & applis' },
+    { hash: 'exemple', label: 'Exemple' },
+    { hash: 'methode', label: 'Méthode' },
+    { hash: 'faq', label: 'FAQ' },
+  ],
+};
+
 export const PAGES = [
   { slug: 'distributeur', label: 'Le distributeur' },
   { slug: 'votre-marque', label: 'Votre marque' },
@@ -67,54 +80,69 @@ export function layout(opts) {
   return opts.mode === 'preview' ? html : html.replace(/(src|href|srcset)="(img|css|js|fonts)\//g, '$1="/$2/').replace(/, (img)\//g, ', /$1/');
 }
 
-function page({ mode, slug, title, description, body, jsonld = '', noindex = false }) {
+function page({ mode, slug, title, description, body, jsonld = '', noindex = false, section = 'distrib', og = 'og.jpg' }) {
   const L = makeLink(mode);
   const canon = SITE.url + (slug === '' ? '/' : '/' + slug);
-  const navLinks = PAGES.map((p) => `<a href="${L(p.slug)}"${p.slug === slug ? ' aria-current="page"' : ''}>${p.label}</a>`).join('\n      ');
-  return typo(`<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${title}</title>
-<meta name="description" content="${description}">
-<link rel="canonical" href="${canon}">
-${noindex ? '<meta name="robots" content="noindex">\n' : ''}<meta name="theme-color" content="#06071A">
-<meta property="og:type" content="website">
-<meta property="og:locale" content="fr_FR">
-<meta property="og:site_name" content="Dreamzz">
-<meta property="og:title" content="${title}">
-<meta property="og:description" content="${description}">
-<meta property="og:url" content="${canon}">
-<meta property="og:image" content="${SITE.url}/img/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48.png">
-<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<link rel="preload" href="fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/barlow-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/site.css">
-${jsonld}</head>
-<body>
-<a class="skip" href="#contenu">Aller au contenu</a>
-<header class="top">
-  <div class="wrap">
-    <a class="logo" href="${L('')}" aria-label="Dreamzz, accueil"><img src="img/logo.webp" alt="dreamzz vape" width="124" height="36"></a>
-    <nav class="nav" id="nav" aria-label="Menu principal">
-      ${navLinks}
-      <a class="btn btn-nav" href="${L('devis')}">Demander un devis</a>
-    </nav>
-    <a class="btn" href="${L('devis')}">Demander un devis</a>
-    <button class="burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu">${ICON.menu()}</button>
-  </div>
-</header>
-<main id="contenu">
-${body}
-</main>
-<footer class="foot">
-  <div class="wrap">
-    <div class="foot-grid">
+  const labs = section === 'labs', hub = section === 'hub';
+  // barre des deux univers, en haut des pages Distributeurs et Labs
+  const uni = hub ? '' : `<div class="uni"><div class="wrap">
+  <a class="uni-home" href="${L('')}">Dreamzz</a>
+  <nav aria-label="Univers Dreamzz"><a href="${L('distributeurs')}"${labs ? '' : ' aria-current="true"'}>Distributeurs</a><a href="${L('labs')}"${labs ? ' aria-current="true"' : ''}>Labs</a></nav>
+</div></div>`;
+  let logo, navLinks, cta;
+  if (labs) {
+    logo = `<a class="logo" href="${L('labs')}" aria-label="Dreamzz Labs, accueil"><img src="img/labs/labs-logo-sm.webp" alt="dreamzz labs" width="130" height="34"></a>`;
+    navLinks = LABS.nav.map((n) => `<a href="#${n.hash}">${n.label}</a>`).join('\n      ');
+    cta = { href: '#devis', label: 'Devis gratuit' };
+  } else if (hub) {
+    logo = `<a class="logo" href="${L('')}" aria-label="Dreamzz, accueil"><img src="img/labs/dreamzz.webp" alt="dreamzz" width="130" height="27"></a>`;
+    navLinks = `<a href="${L('labs')}">Dreamzz Labs</a>\n      <a href="${L('distributeurs')}">Distributeurs</a>`;
+    cta = { href: 'tel:' + SITE.telHref, label: SITE.tel };
+  } else {
+    logo = `<a class="logo" href="${L('distributeurs')}" aria-label="Dreamzz distributeurs, accueil"><img src="img/logo.webp" alt="dreamzz vape" width="124" height="36"></a>`;
+    navLinks = PAGES.map((p) => `<a href="${L(p.slug)}"${p.slug === slug ? ' aria-current="page"' : ''}>${p.label}</a>`).join('\n      ');
+    cta = { href: L('devis'), label: 'Demander un devis' };
+  }
+  const foot = labs ? `
+      <div>
+        <img src="img/labs/labs-logo-sm.webp" alt="dreamzz labs" width="130" height="34" loading="lazy">
+        <p>Packs design, sites, applis et bornes pour les commerces.</p>
+      </div>
+      <div>
+        <h3>Labs</h3>
+        <ul>
+          ${LABS.nav.map((n) => `<li><a href="#${n.hash}">${n.label}</a></li>`).join('\n          ')}
+          <li><a href="#devis">Devis gratuit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:${SITE.telHref}">${SITE.tel}</a></li>
+          <li><a href="${LABS.wa}" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
+          <li><a href="${L('distributeurs')}">Dreamzz Distributeurs</a></li>
+        </ul>
+      </div>` : hub ? `
+      <div>
+        <img src="img/labs/dreamzz.webp" alt="dreamzz" width="130" height="27" loading="lazy">
+        <p>Studio Labs et distributeurs automatiques pour les commerces.</p>
+      </div>
+      <div>
+        <h3>Le site</h3>
+        <ul>
+          <li><a href="${L('labs')}">Dreamzz Labs</a></li>
+          <li><a href="${L('distributeurs')}">Distributeurs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:${SITE.telHref}">${SITE.tel}</a></li>
+          <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
+          <li>SAS Dreamzz · Lot-et-Garonne</li>
+        </ul>
+      </div>` : `
       <div>
         <img src="img/logo.webp" alt="dreamzz vape" width="117" height="34" loading="lazy">
         <p>Distributeurs automatiques de vape à la marque des commerçants.</p>
@@ -133,11 +161,60 @@ ${body}
           <li><a href="mailto:${SITE.email}">${SITE.email}</a></li>
           <li>SAS Dreamzz · Lot-et-Garonne</li>
         </ul>
-      </div>
+      </div>`;
+  const fonts = labs || hub
+    ? `<link rel="preload" href="fonts/montserrat-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/spacegrotesk-latin-var.woff2" as="font" type="font/woff2" crossorigin>`
+    : `<link rel="preload" href="fonts/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/barlow-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>`;
+  return typo(`<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description}">
+<link rel="canonical" href="${canon}">
+${noindex ? '<meta name="robots" content="noindex">\n' : ''}<meta name="theme-color" content="${labs || hub ? '#070B14' : '#06071A'}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="${labs ? 'Dreamzz Labs' : 'Dreamzz'}">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:url" content="${canon}">
+<meta property="og:image" content="${SITE.url}/img/${og}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+${fonts}
+<link rel="stylesheet" href="css/site.css">
+${labs || hub ? '<link rel="stylesheet" href="css/labs.css">\n' : ''}${jsonld}</head>
+<body${labs ? ' class="labs"' : hub ? ' class="labs hub"' : ''}>
+<a class="skip" href="#contenu">Aller au contenu</a>
+${uni}
+<header class="top">
+  <div class="wrap">
+    ${logo}
+    <nav class="nav" id="nav" aria-label="Menu principal">
+      ${navLinks}
+      <a class="btn btn-nav" href="${cta.href}">${cta.label}</a>
+    </nav>
+    <a class="btn" href="${cta.href}">${cta.label}</a>
+    <button class="burger" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menu">${ICON.menu()}</button>
+  </div>
+</header>
+<main id="contenu">
+${body}
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">${foot}
     </div>
     <div class="foot-bottom">
       <span>© 2026 Dreamzz · <a href="${L('mentions-legales')}">Mentions légales</a> · <a href="${L('confidentialite')}">Confidentialité</a></span>
-      <span>Vente de produits du vapotage interdite aux mineurs.</span>
+      ${section === 'distrib' ? '<span>Vente de produits du vapotage interdite aux mineurs.</span>' : `<span>SAS Dreamzz · ${SITE.tel}</span>`}
     </div>
   </div>
 </footer>

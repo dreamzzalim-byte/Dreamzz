@@ -1,5 +1,6 @@
 // Contenu des pages de dreamzz.fr
 import { SITE, ICON, makeLink } from './site.mjs';
+import { hubPage, labsPage } from './labs.mjs';
 
 const PINK = '#C2185B', VIOLET = '#5B3FD0', TEAL = '#139C86';
 const PINK_D = '#FF5CA4', VIOLET_D = '#A98BFF', TEAL_D = '#2ED3B7';
@@ -116,10 +117,13 @@ export function pages(mode) {
   const L = makeLink(mode);
   const out = [];
 
-  // ---------------- Accueil ----------------
+  // ---------------- Carrefour + Labs ----------------
+  out.push(hubPage(mode), labsPage(mode));
+
+  // ---------------- Distributeurs : accueil ----------------
   out.push({
-    file: 'index.html', slug: '',
-    title: mode === 'preview' ? 'dreamzz.fr' : 'Dreamzz · Distributeur de vape à la marque de votre magasin',
+    file: 'distributeurs.html', slug: 'distributeurs',
+    title: 'Dreamzz · Distributeur de vape à la marque de votre magasin',
     description: 'Distributeur automatique de vape mural, en façade ou en boutique, avec le nom et le logo de votre magasin à l’écran. Contrôle d’âge, paiement par carte, appli de gestion. Toutes les ventes sont pour vous.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org',
@@ -480,7 +484,7 @@ ${ctaBand(L)}`,
       <div class="field"><label for="f-ville">Ville</label><input id="f-ville" name="ville" required maxlength="80" autocomplete="address-level2"></div>
       <div class="field"><label for="f-cp">Code postal</label><input id="f-cp" name="cp" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code"></div>
       <div class="field"><label for="f-nom">Votre nom</label><input id="f-nom" name="nom" required maxlength="80" autocomplete="name"></div>
-      <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="tel" type="tel" required maxlength="30" autocomplete="tel" pattern="[0-9 +.()-]{9,30}"></div>
+      <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="tel" type="tel" required maxlength="30" autocomplete="tel" pattern="[0-9 +.\\(\\)\\-]{9,30}"></div>
       <div class="field full"><label for="f-email">E-mail <span class="opt">(facultatif)</span></label><input id="f-email" name="email" type="email" maxlength="120" autocomplete="email"></div>
       <fieldset class="field full"><legend>Emplacement</legend>${radio('emplacement', [['facade', 'Façade'], ['interieur', 'Intérieur'], ['nsp', 'Je ne sais pas']])}</fieldset>
       <fieldset class="field full"><legend>Offre</legend>${radio('offre', [['pack', 'Pack marque'], ['location', 'Machine + logiciel en location'], ['machine', 'Machine seule'], ['nsp', 'Je ne sais pas']])}</fieldset>
@@ -500,13 +504,13 @@ ${ctaBand(L)}`,
 
   // ---------------- Mentions légales ----------------
   out.push({
-    file: 'mentions-legales.html', slug: 'mentions-legales',
+    file: 'mentions-legales.html', slug: 'mentions-legales', section: 'hub',
     title: 'Mentions légales · Dreamzz',
     description: 'Mentions légales du site dreamzz.fr, édité par la SAS Dreamzz.',
     body: `
 <section class="light sec">
   <div class="wrap prose">
-    <h1 style="font-size:clamp(44px,6vw,72px)">Mentions légales</h1>
+    <h1 style="font-size:clamp(40px,6vw,72px)">Mentions légales</h1>
     <h2>Éditeur</h2>
     <p>SAS Dreamzz, société par actions simplifiée au capital de 1 €</p>
     <p>Siège social : 30 chemin du Tannat, 47310 Estillac</p>
@@ -521,13 +525,16 @@ ${ctaBand(L)}`,
     <p>La vente de produits du vapotage est interdite aux mineurs. Les distributeurs Dreamzz contrôlent la carte d’identité à chaque achat.</p>
     <h2>Prix</h2>
     <p>Les prix affichés sont hors taxes et s’adressent aux professionnels. Seul le devis signé engage les parties.</p>
+    <h2>Dreamzz Labs</h2>
+    <p>Dreamzz Labs est l’activité de création graphique, de sites et d’applications de la SAS Dreamzz.</p>
+    <p>Certaines images d’illustration sont générées par intelligence artificielle (image virtuelle). « Luna Barber » est un commerce fictif créé pour la démonstration.</p>
   </div>
 </section>`,
   });
 
   // ---------------- Confidentialité ----------------
   out.push({
-    file: 'confidentialite.html', slug: 'confidentialite',
+    file: 'confidentialite.html', slug: 'confidentialite', section: 'hub',
     title: 'Confidentialité · Dreamzz',
     description: 'Comment Dreamzz traite les données envoyées par le formulaire de devis.',
     body: `
@@ -537,7 +544,7 @@ ${ctaBand(L)}`,
     <h2>Responsable</h2>
     <p>SAS Dreamzz, 30 chemin du Tannat, 47310 Estillac · <a href="mailto:${SITE.email}">${SITE.email}</a></p>
     <h2>Données collectées</h2>
-    <p>Par le formulaire de devis : nom du commerce, type de commerce, ville, code postal, nom, téléphone, e-mail, emplacement, offre et message.</p>
+    <p>Par les formulaires de devis : nom du commerce, activité, ville, code postal, nom, téléphone, e-mail, besoin ou offre choisie, emplacement et message.</p>
     <h2>Utilisation</h2>
     <p>Vous recontacter pour votre devis et suivre la relation commerciale. Aucune revente, aucune publicité ciblée.</p>
     <h2>Conservation</h2>
@@ -554,7 +561,7 @@ ${ctaBand(L)}`,
 
   // ---------------- 404 ----------------
   out.push({
-    file: '404.html', slug: '404', noindex: true,
+    file: '404.html', slug: '404', noindex: true, section: 'hub',
     title: 'Page introuvable · Dreamzz',
     description: 'Cette page n’existe pas.',
     body: `
@@ -563,7 +570,7 @@ ${ctaBand(L)}`,
   <div class="wrap rel">
     <p class="kicker">Erreur 404</p>
     <h1>Page <span class="accent">introuvable.</span></h1>
-    <div class="btns" style="margin-top:32px"><a class="btn" href="${L('')}">Retour à l’accueil</a><a class="btn btn-ghost" href="${L('devis')}">Demander un devis</a></div>
+    <div class="btns" style="margin-top:32px"><a class="btn" href="${L('')}">Retour à l’accueil</a><a class="btn btn-ghost" href="${L('distributeurs')}">Distributeurs</a><a class="btn btn-ghost" href="${L('labs')}">Dreamzz Labs</a></div>
   </div>
 </section>`,
   });

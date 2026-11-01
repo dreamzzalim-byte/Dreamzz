@@ -25,9 +25,13 @@
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
+<div class="uni"><div class="wrap">
+  <a class="uni-home" href="/">Dreamzz</a>
+  <nav aria-label="Univers Dreamzz"><a href="/distributeurs" aria-current="true">Distributeurs</a><a href="/labs">Labs</a></nav>
+</div></div>
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="/" aria-label="Dreamzz, accueil"><img src="/img/logo.webp" alt="dreamzz vape" width="124" height="36"></a>
+    <a class="logo" href="/distributeurs" aria-label="Dreamzz distributeurs, accueil"><img src="/img/logo.webp" alt="dreamzz vape" width="124" height="36"></a>
     <nav class="nav" id="nav" aria-label="Menu principal">
       <a href="/distributeur">Le distributeur</a>
       <a href="/votre-marque">Votre marque</a>
@@ -62,7 +66,7 @@
       <div class="field"><label for="f-ville">Ville</label><input id="f-ville" name="ville" required maxlength="80" autocomplete="address-level2"></div>
       <div class="field"><label for="f-cp">Code postal</label><input id="f-cp" name="cp" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code"></div>
       <div class="field"><label for="f-nom">Votre nom</label><input id="f-nom" name="nom" required maxlength="80" autocomplete="name"></div>
-      <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="tel" type="tel" required maxlength="30" autocomplete="tel" pattern="[0-9 +.()-]{9,30}"></div>
+      <div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="tel" type="tel" required maxlength="30" autocomplete="tel" pattern="[0-9 +.\(\)\-]{9,30}"></div>
       <div class="field full"><label for="f-email">E-mail <span class="opt">(facultatif)</span></label><input id="f-email" name="email" type="email" maxlength="120" autocomplete="email"></div>
       <fieldset class="field full"><legend>Emplacement</legend><div class="choices"><label><input type="radio" name="emplacement" value="facade"> Façade</label><label><input type="radio" name="emplacement" value="interieur"> Intérieur</label><label><input type="radio" name="emplacement" value="nsp" checked> Je ne sais pas</label></div></fieldset>
       <fieldset class="field full"><legend>Offre</legend><div class="choices"><label><input type="radio" name="offre" value="pack"> Pack marque</label><label><input type="radio" name="offre" value="location"> Machine + logiciel en location</label><label><input type="radio" name="offre" value="machine"> Machine seule</label><label><input type="radio" name="offre" value="nsp" checked> Je ne sais pas</label></div></fieldset>
