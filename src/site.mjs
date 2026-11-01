@@ -18,9 +18,9 @@ export const LABS = {
   wa: 'https://wa.me/33767151793',
   nav: [
     { hash: 'packs', label: 'Packs design' },
-    { hash: 'digital', label: 'Sites & applis' },
+    { hash: 'sur-mesure', label: 'Sur mesure' },
     { hash: 'exemple', label: 'Exemple' },
-    { hash: 'methode', label: 'Méthode' },
+    { hash: 'digital', label: 'Sites & applis' },
     { hash: 'faq', label: 'FAQ' },
   ],
 };

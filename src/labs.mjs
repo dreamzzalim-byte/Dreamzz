@@ -21,13 +21,21 @@ const DIGITAL = [
 ];
 
 const STEPS = [
-  ['On en parle', '15 min au téléphone ou sur WhatsApp.'],
+  ['On écoute ton projet', '15 min au téléphone ou sur WhatsApp : ton idée, ton style, ton budget.'],
   ['Les pistes', '4 pistes de logo. Tu choisis ta préférée.'],
   ['Retouches', '2 tours de modifs inclus.'],
   ['Tu reçois tout', 'Fichiers prêts à poster et à imprimer.'],
 ];
 
+const CASES = [
+  ['Déjà un logo ?', 'On part du tien.'],
+  ['Juste un flyer ?', 'On fait juste le flyer.'],
+  ['Budget serré ?', 'On adapte le pack.'],
+  ['Une idée précise ?', 'On suit ta vision.'],
+];
+
 const FAQ = [
+  ['Mon projet ne rentre dans aucun pack ?', 'On compose un pack sur mesure, au prix de ton projet.'],
   ['J’ai déjà un logo, je fais quoi ?', 'On part de ton logo et on construit le reste du pack autour.'],
   ['Combien de temps ça prend ?', '3 jours pour l’Essentiel, 7 jours pour Réseaux, 10 jours pour Lancement, à partir de notre premier échange.'],
   ['Comment je paie ?', '50 % à la commande, 50 % à la livraison.'],
@@ -37,7 +45,7 @@ const FAQ = [
   ['Les fichiers sont à moi ?', 'Oui. Une fois le pack réglé, tu les utilises librement pour ton commerce.'],
 ];
 
-const NEEDS = [['essentiel', 'Pack Essentiel'], ['reseaux', 'Pack Réseaux'], ['lancement', 'Pack Lancement'], ['site', 'Site web'], ['appli', 'Appli'], ['borne', 'Borne'], ['nsp', 'Je ne sais pas encore']];
+const NEEDS = [['essentiel', 'Pack Essentiel'], ['reseaux', 'Pack Réseaux'], ['lancement', 'Pack Lancement'], ['site', 'Site web'], ['appli', 'Appli'], ['borne', 'Borne'], ['mesure', 'Sur mesure'], ['nsp', 'Je ne sais pas encore']];
 const ACTIVITIES = ['Restaurant, snack', 'Coiffure, barber', 'Beauté, esthétique', 'Boutique', 'Artisan, BTP', 'Service, profession libérale', 'Autre'];
 
 // ---------------- Carrefour ----------------
@@ -86,7 +94,7 @@ export function labsPage(mode) {
   return {
     file: 'labs.html', slug: 'labs', section: 'labs', og: 'og-labs.jpg',
     title: 'Dreamzz Labs · Packs design, sites et applis pour les commerces',
-    description: 'Logo, flyers, visuels réseaux, vidéo pub : packs design dès 190 € HT, livrés en 3 à 10 jours. Sites web dès 490 € HT, applis et bornes sur devis. Devis gratuit.',
+    description: 'Logo, flyers, visuels réseaux, vidéo pub : packs design sur mesure dès 190 € HT, livrés en 3 à 10 jours. Sites web dès 490 € HT, applis et bornes sur devis. Devis gratuit.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': SITE.url + '/labs#labs', name: 'Dreamzz Labs',
       parentOrganization: { '@id': SITE.url + '/#org' }, url: SITE.url + '/labs', image: SITE.url + '/img/og-labs.jpg',
@@ -105,12 +113,12 @@ export function labsPage(mode) {
     <div>
       <p class="kicker">Dreamzz Labs · studio design &amp; digital</p>
       <h1>Ton commerce, <span class="accent">on s’occupe de tout.</span></h1>
-      <p class="lead">Logo, flyers, visuels réseaux, vidéo pub, site web, appli. Un seul interlocuteur, des prix clairs, livré en quelques jours.</p>
+      <p class="lead">Ton projet, ton style, ton budget : on s’adapte. Logo, flyers, visuels réseaux, vidéo pub, site web, appli.</p>
       <div class="btns">
         <a class="btn" href="#devis">Devis gratuit</a>
         <a class="btn btn-ghost" href="${wa}" rel="noopener">WhatsApp</a>
       </div>
-      <ul class="dots"><li>Réponse sous 24 h</li><li>2 tours de modifs inclus</li><li>Partout en France</li></ul>
+      <ul class="dots"><li>Sur mesure</li><li>2 tours de modifs inclus</li><li>Partout en France</li></ul>
     </div>
     <figure class="lx-shot">
       <div class="lx-shot-img">${pic('hero', 'Façade de nuit d’un salon de coiffure avec son enseigne, son affiche, sa borne et sa story sur téléphone', [700, 1100], '(max-width: 900px) 100vw, 520px', true)}</div>
@@ -137,11 +145,25 @@ export function labsPage(mode) {
         <a class="btn${p.top ? '' : ' btn-ghost'}" href="#devis" data-need="${p.id}">Choisir ${p.name}</a>
       </article>`).join('')}
     </div>
-    <p class="note lx-after">Déjà un logo ? On part du tien et on adapte le pack.</p>
+    <p class="note lx-after">Aucun pack ne colle ? <a class="link" href="#sur-mesure">On fait du sur mesure.</a></p>
   </div>
 </section>
 
-<section class="lx-sec" id="exemple">
+<section class="lx-sec" id="sur-mesure">
+  <div class="wrap lx-mesure">
+    <div>
+      <p class="kicker">Sur mesure</p>
+      <h2>Ton projet, <span class="accent">à ta façon.</span></h2>
+      <p class="lead">Les packs sont une base. On les ajuste à ton commerce, à tes idées et à ton budget.</p>
+      <div class="btns"><a class="btn" href="#devis" data-need="mesure">Parler de mon projet</a></div>
+    </div>
+    <ul class="lx-cases">${CASES.map(([q, a]) => `
+      <li><b>${q}</b><span>${a}</span></li>`).join('')}
+    </ul>
+  </div>
+</section>
+
+<section class="lx-sec lx-alt" id="exemple">
   <div class="wrap">
     <div class="head"><div><p class="kicker">Exemple de pack</p><h2>Un pack, toute ton image</h2><p class="lead">Du logo à l’enseigne, de la story à la vidéo pub : tout est pensé ensemble.</p></div></div>
     <div class="lx-gal">
@@ -158,7 +180,7 @@ export function labsPage(mode) {
   </div>
 </section>
 
-<section class="lx-sec lx-alt" id="digital">
+<section class="lx-sec" id="digital">
   <div class="wrap">
     <div class="head"><div><p class="kicker">Sites, applis, bornes</p><h2>Les outils de ton commerce</h2></div></div>
     <div class="lx-dig">${DIGITAL.map((d) => `
@@ -175,7 +197,7 @@ export function labsPage(mode) {
   </div>
 </section>
 
-<section class="lx-sec" id="methode">
+<section class="lx-sec lx-alt" id="methode">
   <div class="wrap">
     <div class="head"><div><p class="kicker">Méthode</p><h2>Ton pack en 4 étapes</h2></div></div>
     <ol class="lx-steps">${STEPS.map(([h, p], i) => `
@@ -189,7 +211,7 @@ export function labsPage(mode) {
   </div>
 </section>
 
-<section class="lx-sec lx-alt" id="faq">
+<section class="lx-sec" id="faq">
   <div class="wrap">
     <div class="head"><div><p class="kicker">Questions</p><h2>Les questions qu’on nous pose</h2></div></div>
     <div class="faq">${FAQ.map(([q, a]) => `
@@ -200,7 +222,7 @@ export function labsPage(mode) {
 
 <section class="light sec lx-devis" id="devis">
   <div class="wrap">
-    <div class="head"><div><p class="kicker">Devis gratuit</p><h2>Parle-nous de ton commerce</h2><p class="lead">Réponse sous 24 h. Ou appelle directement.</p></div></div>
+    <div class="head"><div><p class="kicker">Devis gratuit</p><h2>Parle-nous de ton projet</h2><p class="lead">Réponse sous 24 h. Ou appelle directement.</p></div></div>
     <div class="form-grid">
       <form class="form" id="devis-form" action="${SITE.devisApi}" method="post" novalidate data-labs="1"${mode === 'preview' ? ' data-preview="1"' : ''}>
         <div class="field"><label for="l-commerce">Ton commerce</label><input id="l-commerce" name="commerce" required maxlength="120" autocomplete="organization" placeholder="Nom du commerce ou du projet"></div>
@@ -211,7 +233,7 @@ export function labsPage(mode) {
         <div class="field"><label for="l-tel">Téléphone</label><input id="l-tel" name="tel" type="tel" required maxlength="30" autocomplete="tel" pattern="[0-9 +.\\(\\)\\-]{9,30}"></div>
         <div class="field"><label for="l-email">E-mail <span class="opt">(facultatif)</span></label><input id="l-email" name="email" type="email" maxlength="120" autocomplete="email"></div>
         <fieldset class="field full"><legend>Ton besoin</legend><div class="choices">${NEEDS.map(([v, t]) => `<label><input type="checkbox" name="besoin" value="${v}"> ${t}</label>`).join('')}</div></fieldset>
-        <div class="field full"><label for="l-msg">Message <span class="opt">(facultatif)</span></label><textarea id="l-msg" name="precisions" maxlength="1200" placeholder="Ton idée, tes couleurs, une date…"></textarea></div>
+        <div class="field full"><label for="l-msg">Message <span class="opt">(facultatif)</span></label><textarea id="l-msg" name="precisions" maxlength="1200" placeholder="Ton projet, ton style, ton budget, une date…"></textarea></div>
         <div class="hp" aria-hidden="true"><label for="l-site">Site web</label><input id="l-site" name="site" tabindex="-1" autocomplete="off"></div>
         <p class="legal">Tes coordonnées servent uniquement à te recontacter pour ce devis. <a href="${L('confidentialite')}">Confidentialité</a></p>
         <div class="form-actions"><button class="btn" type="submit">Envoyer ma demande</button><p class="form-msg" role="status" aria-live="polite"></p></div>

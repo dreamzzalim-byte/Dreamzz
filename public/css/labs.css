@@ -84,6 +84,16 @@ body.labs{
 .lx-pack li::before{content:"";position:absolute;left:2px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 .lx-pack .btn{margin-top:auto}
 
+/* sur mesure */
+.lx-mesure{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:64px;align-items:center}
+.lx-mesure .lead{margin:20px 0 30px}
+.lx-cases{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.lx-cases li{display:flex;flex-direction:column;gap:8px;padding:26px 24px;border-radius:20px;background:rgba(13,22,40,.75);border:1px solid rgba(125,211,252,.18);position:relative;overflow:hidden}
+.lx-cases li::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan);box-shadow:0 0 14px var(--cyan)}
+.lx-cases b{font-family:var(--display);font-weight:900;font-size:20px;text-transform:uppercase;letter-spacing:-.005em;color:#fff}
+.lx-cases span{font-size:17px;color:var(--cyan);font-weight:600}
+.lx-after .link{font-weight:700}
+
 /* galerie exemple */
 .lx-gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .lx-gal figure{position:relative;margin:0;border-radius:22px;overflow:hidden;aspect-ratio:9/16;background:#000;border:1px solid rgba(125,211,252,.18);box-shadow:0 24px 50px rgba(0,0,0,.45)}
@@ -169,6 +179,7 @@ body.labs{
   .lx-hero-grid{grid-template-columns:1fr;gap:44px}
   .lx-shot{margin:0 auto}
   .lx-packs,.lx-dig,.lx-facts{grid-template-columns:1fr}
+  .lx-mesure{grid-template-columns:1fr;gap:36px}
   .lx-pack.is-top{order:-1}
   .lx-pack .lx-badge{margin-top:-50px}
   .lx-sec{padding:72px 0}
@@ -183,6 +194,10 @@ body.labs{
   .lx-gal .ztag{left:26px;bottom:12px}
   .lx-price b{font-size:54px}
   .lx-steps{grid-template-columns:1fr}
+  .lx-cases{grid-template-columns:1fr 1fr;gap:12px}
+  .lx-cases li{padding:20px 16px}
+  .lx-cases b{font-size:16px}
+  .lx-cases span{font-size:15px}
   .door-in{padding:32px 20px 40px}
   .door{min-height:56svh}
   .door::before{background:linear-gradient(180deg,rgba(7,11,20,.1) 0%,rgba(7,11,20,.55) 32%,rgba(7,11,20,.9) 52%,rgba(7,11,20,.98) 100%)}
