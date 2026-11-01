@@ -9,16 +9,25 @@ const pic = (name, alt, w = [600, 900], sizes = '(max-width: 900px) 100vw, 400px
   `<img src="img/labs/${name}-${w[0]}.webp" srcset="img/labs/${name}-${w[0]}.webp ${w[0]}w, img/labs/${name}-${w[1]}.webp ${w[1]}w" sizes="${sizes}" alt="${alt}" width="${w[0]}" height="${Math.round(w[0] * 1.25)}"${eager ? ' fetchpriority="high"' : ' loading="lazy"'}>`;
 
 const PACKS = [
-  { id: 'essentiel', name: 'Essentiel', price: '190', delay: '3 jours', items: ['Logo : 4 pistes au choix', 'Versions couleurs, blanc et noir', 'Icône pour les réseaux'] },
-  { id: 'reseaux', name: 'Réseaux', price: '390', delay: '7 jours', top: true, items: ['Tout le pack Essentiel', 'Flyer', '3 visuels réseaux', 'Photo de profil', 'Bannière'] },
-  { id: 'lancement', name: 'Lancement', price: '690', delay: '10 jours', items: ['Tout le pack Réseaux', 'Logo 3D', 'Vidéo pub 15 s', 'Carte de visite', 'Charte graphique'] },
+  { id: 'essentiel', name: 'Essentiel', price: '249', delay: '3 jours', items: ['3 visuels réseaux', 'Photo de profil', 'Logo', 'Bannière'] },
+  { id: 'reseaux', name: 'Réseaux', price: '449', delay: '7 jours', top: true, items: ['Tout le pack Essentiel', 'Flyer', '6 stories', 'Carte de visite'] },
+  { id: 'lancement', name: 'Lancement', price: '790', delay: '10 jours', items: ['Tout le pack Réseaux', 'Vidéo pub 15 s', 'Charte graphique', 'Lens Snap'] },
 ];
 
-const DIGITAL = [
-  { id: 'site', img: null, name: 'Site web', price: 'dès 490 € HT', p: 'Site vitrine rapide sur téléphone, avec formulaire de devis. Exemple : ce site.' },
-  { id: 'appli', img: 'terrain', alt: 'Technicien de nuit consultant une appli de chantier sur son téléphone', name: 'Appli', price: 'sur devis', p: 'Appli métier sur téléphone : suivi, planning, stock, rapports. Exemple : une appli terrain.' },
-  { id: 'borne', img: 'borne', alt: 'Borne de paiement à écran tactile avec QR code, de nuit', name: 'Borne', price: 'sur devis', p: 'Interface de borne ou de distributeur à ta marque, avec son appli de gestion.' },
+
+// Parcours « Du terrain à l'écran » : un film qui avance au scroll, une fiche par arrêt.
+// t = seconde du film où la caméra se pose ; side = côté libre de l'image (ordinateur) ; x = cadrage téléphone (0 à 100).
+const STOPS = [
+  { id: 'route', t: 0, side: 'l', x: 50 },
+  { id: 'barber', t: 3.1, side: 'l', x: 62 },
+  { id: 'atelier', t: 6.6, side: 'r', x: 70 },
+  { id: 'bistrot', t: 10.2, side: 'l', x: 60 },
+  { id: 'chantier', t: 13.8, side: 'l', x: 52 },
+  { id: 'aerien', t: 17.4, side: 'l', x: 50 },
 ];
+const IDS = ['', 'packs', 'applis', 'site', 'terrain', 'au-mois'];
+const at = (i) => `${IDS[i] ? `id="${IDS[i]}" ` : ''}data-stop="${i}" data-t="${STOPS[i].t}" data-side="${STOPS[i].side}" data-x="${STOPS[i].x}"`;
+const price = (n, u = '') => `<b class="sq-p">${n} €${u}</b>`;
 
 const STEPS = [
   ['On écoute ton projet', '15 min au téléphone ou sur WhatsApp : ton idée, ton style, ton budget.'],
@@ -45,7 +54,7 @@ const FAQ = [
   ['Les fichiers sont à moi ?', 'Oui. Une fois le pack réglé, tu les utilises librement pour ton commerce.'],
 ];
 
-const NEEDS = [['essentiel', 'Pack Essentiel'], ['reseaux', 'Pack Réseaux'], ['lancement', 'Pack Lancement'], ['site', 'Site web'], ['appli', 'Appli'], ['borne', 'Borne'], ['mesure', 'Sur mesure'], ['nsp', 'Je ne sais pas encore']];
+const NEEDS = [['essentiel', 'Pack Essentiel'], ['reseaux', 'Pack Réseaux'], ['lancement', 'Pack Lancement'], ['site', 'Site web'], ['appli', 'Appli'], ['borne', 'Borne'], ['terrain', 'Appli terrain'], ['suivi', 'Suivi au mois'], ['mesure', 'Sur mesure'], ['nsp', 'Je ne sais pas encore']];
 const ACTIVITIES = ['Restaurant, snack', 'Coiffure, barber', 'Beauté, esthétique', 'Boutique', 'Artisan, BTP', 'Service, profession libérale', 'Autre'];
 
 // ---------------- Carrefour ----------------
@@ -69,7 +78,7 @@ export function hubPage(mode) {
       <img class="door-logo" src="img/labs/labs-logo-sm.webp" alt="dreamzz labs" width="130" height="34">
       <span class="door-k">Studio design &amp; digital</span>
       <span class="door-h">Ton commerce, <em>on s’occupe de tout.</em></span>
-      <span class="door-p">Packs design dès 190 €. Sites, applis, bornes.</span>
+      <span class="door-p">Packs design, sites, applis, bornes. Dès 99 €.</span>
       <span class="btn">Découvrir Dreamzz Labs</span>
     </span>
   </a>
@@ -94,7 +103,7 @@ export function labsPage(mode) {
   return {
     file: 'labs.html', slug: 'labs', section: 'labs', og: 'og-labs.jpg',
     title: 'Dreamzz Labs · Packs design, sites et applis pour les commerces',
-    description: 'Logo, flyers, visuels réseaux, vidéo pub : packs design sur mesure dès 190 € HT, livrés en 3 à 10 jours. Sites web dès 490 € HT, applis et bornes sur devis. Devis gratuit.',
+    description: 'Packs design dès 249 € HT, sites web dès 99 € HT, applis dès 990 € HT, bornes et applis terrain. Sur mesure, devis gratuit.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': SITE.url + '/labs#labs', name: 'Dreamzz Labs',
       parentOrganization: { '@id': SITE.url + '/#org' }, url: SITE.url + '/labs', image: SITE.url + '/img/og-labs.jpg',
@@ -107,59 +116,66 @@ export function labsPage(mode) {
       mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
     })}</script>\n`,
     body: `
-<section class="lx-hero">
-  <div class="lx-glow"></div>
-  <div class="wrap rel lx-hero-grid">
-    <div>
-      <p class="kicker">Dreamzz Labs · studio design &amp; digital</p>
-      <h1>Ton commerce, <span class="accent">on s’occupe de tout.</span></h1>
-      <p class="lead">Ton projet, ton style, ton budget : on s’adapte. Logo, flyers, visuels réseaux, vidéo pub, site web, appli.</p>
-      <div class="btns">
-        <a class="btn" href="#devis">Devis gratuit</a>
-        <a class="btn btn-ghost" href="${wa}" rel="noopener">WhatsApp</a>
-      </div>
-      <ul class="dots"><li>Sur mesure</li><li>2 tours de modifs inclus</li><li>Partout en France</li></ul>
-    </div>
-    <figure class="lx-shot">
-      <div class="lx-shot-img">${pic('hero', 'Façade de nuit d’un salon de coiffure avec son enseigne, son affiche, sa borne et sa story sur téléphone', [700, 1100], '(max-width: 900px) 100vw, 520px', true)}</div>
-      ${tag('LOGO', 'sm', 'left:58%;top:12%')}
-      ${tag('AFFICHE', 'sm', 'left:7%;top:24%')}
-      ${tag('BORNE', 'sm', 'right:2%;top:33%')}
-      ${tag('SITE WEB', 'sm', 'left:27%;top:60%')}
-      ${tag('STORY', 'sm', 'right:4%;top:71%')}
-      <figcaption>Exemple : Luna Barber, commerce fictif. Image générée par IA.</figcaption>
-    </figure>
+<section class="sq" id="parcours" aria-label="Nos offres, du terrain à l’écran">
+  <div class="sq-stage">
+    <video class="sq-video" muted playsinline preload="auto" poster="img/labs/parcours/arret-0.webp" data-src="img/labs/parcours/parcours" aria-hidden="true"></video>
+    <div class="sq-shade"></div>
+    <ol class="sq-dots" aria-hidden="true">${STOPS.map(() => '<li></li>').join('')}</ol>
+    <p class="sq-hint" aria-hidden="true">Fais défiler</p>
+    <p class="sq-ia">Images générées par IA.</p>
   </div>
-</section>
-
-<section class="lx-sec lx-alt" id="packs">
-  <div class="wrap">
-    <div class="head"><div><p class="kicker">Packs design</p><h2>Trois packs, un prix clair</h2></div><p class="note">Prix HT · 50 % à la commande · 2 tours de modifs inclus</p></div>
-    <div class="lx-packs">${PACKS.map((p) => `
-      <article class="lx-pack${p.top ? ' is-top' : ''}">
-        ${p.top ? tag('RECOMMANDÉ', 'xs lx-badge') : ''}
-        <h3>${p.name}</h3>
-        <p class="lx-price"><b>${p.price} €</b><span>HT</span></p>
-        <p class="lx-delay">Livré en ${p.delay}</p>
-        <ul>${p.items.map((i) => `<li>${i}</li>`).join('')}</ul>
-        <a class="btn${p.top ? '' : ' btn-ghost'}" href="#devis" data-need="${p.id}">Choisir ${p.name}</a>
-      </article>`).join('')}
-    </div>
-    <p class="note lx-after">Aucun pack ne colle ? <a class="link" href="#sur-mesure">On fait du sur mesure.</a></p>
-  </div>
-</section>
-
-<section class="lx-sec" id="sur-mesure">
-  <div class="wrap lx-mesure">
-    <div>
-      <p class="kicker">Sur mesure</p>
-      <h2>Ton projet, <span class="accent">à ta façon.</span></h2>
-      <p class="lead">Les packs sont une base. On les ajuste à ton commerce, à tes idées et à ton budget.</p>
-      <div class="btns"><a class="btn" href="#devis" data-need="mesure">Parler de mon projet</a></div>
-    </div>
-    <ul class="lx-cases">${CASES.map(([q, a]) => `
-      <li><b>${q}</b><span>${a}</span></li>`).join('')}
-    </ul>
+  <div class="sq-steps">
+    <div class="sq-step" ${at(0)}><div class="sq-pin"><article class="sq-card sq-intro">
+      <p class="kicker">Dreamzz Labs</p>
+      <h1>Du terrain <span class="accent">à l’écran.</span></h1>
+      <p class="lead">Design, sites, applis et bornes, pour les commerces et les équipes. Sur mesure.</p>
+      <div class="btns"><a class="btn" href="#devis">Devis gratuit</a><a class="btn btn-ghost" href="${wa}" rel="noopener">WhatsApp</a></div>
+    </article></div></div>
+    <div class="sq-step" ${at(1)}><div class="sq-pin"><article class="sq-card">
+      ${tag('PACKS DESIGN', 'xs sq-tag')}
+      <h2>Toute ton image, d’un coup.</h2>
+      <ul class="sq-list">${PACKS.map((p) => `
+        <li class="${p.top ? 'is-top' : ''}"><span><b>${p.name}</b><small>${p.items.filter((i) => !i.startsWith('Tout')).join(' · ')}</small></span>${price(p.price)}</li>`).join('')}
+      </ul>
+      <p class="sq-note">À la carte dès 99 € · Prix HT · 2 tours de modifs inclus</p>
+      <a class="btn" href="#devis" data-need="reseaux">Choisir mon pack</a>
+    </article></div></div>
+    <div class="sq-step" ${at(2)}><div class="sq-pin"><article class="sq-card">
+      ${tag('APPLIS ET BORNES', 'xs sq-tag')}
+      <h2>Ta borne, ton appli, ta gestion.</h2>
+      <ul class="sq-list">
+        <li><span><b>Appli métier</b><small>Stock, planning, rapports, sur téléphone</small></span><span class="sq-from">dès ${price('990')}</span></li>
+        <li><span><b>Borne à ta marque</b><small>Écran de la borne et appli de gestion</small></span>${price('599')}</li>
+      </ul>
+      <p class="sq-note">Borne aussi en formule à 39,99 €/mois · Prix HT</p>
+      <a class="btn" href="#devis" data-need="appli">Parler de mon projet</a>
+    </article></div></div>
+    <div class="sq-step" ${at(3)}><div class="sq-pin"><article class="sq-card">
+      ${tag('SITE WEB', 'xs sq-tag')}
+      <h2>En ligne en 72 h.</h2>
+      <ul class="sq-list">
+        <li><span><b>Site Express</b><small>1 page, domaine à ton nom</small></span><span class="sq-from">${price('99')} <small>+ 19 €/mois</small></span></li>
+      </ul>
+      <p class="sq-note">Options : pages, réservation, fiche Google, animations · Prix HT</p>
+      <a class="btn" href="#devis" data-need="site">Lancer mon site</a>
+    </article></div></div>
+    <div class="sq-step" ${at(4)}><div class="sq-pin"><article class="sq-card">
+      ${tag('APPLIS TERRAIN', 'xs sq-tag')}
+      <h2>Pensé pour le terrain.</h2>
+      <p class="lead">Rapports, plannings, signatures. Ça marche de nuit, sans réseau, avec des gants.</p>
+      <p class="sq-note">Exemple : une appli de perchage ferroviaire, utilisée chaque nuit. Sur devis.</p>
+      <a class="btn" href="#devis" data-need="terrain">Parler de mon équipe</a>
+    </article></div></div>
+    <div class="sq-step" ${at(5)}><div class="sq-pin"><article class="sq-card">
+      ${tag('AU MOIS', 'xs sq-tag')}
+      <h2>On reste à côté de toi.</h2>
+      <ul class="sq-list">
+        <li><span><b>Réseaux</b><small>4 posts par mois, visuels inclus</small></span>${price('149', '/mois')}</li>
+        <li><span><b>Entretien du site</b><small>Mises à jour, petites modifs avec Plus</small></span><span class="sq-from">${price('19', '/mois')} <small>ou 39 €</small></span></li>
+      </ul>
+      <p class="sq-note">Sans engagement · Prix HT</p>
+      <div class="btns"><a class="btn" href="#devis" data-need="suivi">Devis gratuit</a><a class="btn btn-ghost" href="tel:${SITE.telHref}">${SITE.tel}</a></div>
+    </article></div></div>
   </div>
 </section>
 
@@ -177,23 +193,6 @@ export function labsPage(mode) {
       </figure>
     </div>
     <p class="note lx-after">Luna Barber est un commerce fictif créé pour la démonstration. Images générées par IA.</p>
-  </div>
-</section>
-
-<section class="lx-sec" id="digital">
-  <div class="wrap">
-    <div class="head"><div><p class="kicker">Sites, applis, bornes</p><h2>Les outils de ton commerce</h2></div></div>
-    <div class="lx-dig">${DIGITAL.map((d) => `
-      <article class="lx-card">
-        <div class="lx-card-img">${d.img ? pic(d.img, d.alt, [600, 900], '(max-width: 900px) 100vw, 380px') : `<img src="img/labs/site-600.webp" srcset="img/labs/site-600.webp 600w, img/labs/site-900.webp 900w" sizes="(max-width: 900px) 100vw, 380px" alt="Le site Dreamzz Labs affiché sur ordinateur et sur téléphone" width="600" height="450" loading="lazy">`}</div>
-        <div class="lx-card-txt">
-          <h3>${d.name}</h3>
-          <p class="lx-from">${d.price}</p>
-          <p>${d.p}</p>
-          <a class="link" href="#devis" data-need="${d.id}">Demander un devis</a>
-        </div>
-      </article>`).join('')}
-    </div>
   </div>
 </section>
 

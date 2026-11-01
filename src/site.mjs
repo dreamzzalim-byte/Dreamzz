@@ -18,9 +18,9 @@ export const LABS = {
   wa: 'https://wa.me/33767151793',
   nav: [
     { hash: 'packs', label: 'Packs design' },
-    { hash: 'sur-mesure', label: 'Sur mesure' },
-    { hash: 'exemple', label: 'Exemple' },
-    { hash: 'digital', label: 'Sites & applis' },
+    { hash: 'applis', label: 'Applis et bornes' },
+    { hash: 'site', label: 'Site web' },
+    { hash: 'terrain', label: 'Terrain' },
     { hash: 'faq', label: 'FAQ' },
   ],
 };
@@ -219,7 +219,7 @@ ${body}
   </div>
 </footer>
 <script src="js/site.js" defer></script>
-</body>
+${slug === 'labs' ? '<script src="js/parcours.js" defer></script>\n' : ''}</body>
 </html>
 `);
 }
