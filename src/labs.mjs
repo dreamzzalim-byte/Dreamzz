@@ -130,7 +130,7 @@ export function labsPage(mode) {
     body: `
 <section class="sq" id="parcours" aria-label="Nos offres">
   <div class="sq-stage">
-    <video class="sq-video" muted playsinline preload="auto" poster="img/labs/parcours/arret-0.webp" data-src="img/labs/parcours/parcours" aria-hidden="true"></video>
+    <canvas class="sq-film" data-src="img/labs/parcours/" data-frames="238" aria-hidden="true"></canvas>
     <div class="sq-shade"></div>
     <ol class="sq-dots" aria-hidden="true">${STOPS.map(() => '<li></li>').join('')}</ol>
     <p class="sq-hint" aria-hidden="true">Fais défiler</p>
