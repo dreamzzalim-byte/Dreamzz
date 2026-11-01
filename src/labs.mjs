@@ -139,8 +139,8 @@ export function labsPage(mode) {
   </div>
   <div class="sq-steps">
     <div class="sq-step" ${at(0)}><div class="sq-say">
-      <h1 class="sq-l sq-big">Du terrain <span>à l’écran.</span></h1>
-      <p class="sq-l sq-blue">Design graphique · Sites internet · Interfaces · Applications</p>
+      <h1 class="sq-l sq-big">Design, sites et applications <span>pour les entreprises.</span></h1>
+      <p class="sq-l sq-blue">Prix clairs · Devis gratuit · Partout en France</p>
       <div class="sq-btns"><a class="btn" href="#devis">Demander un devis</a><a class="btn btn-ghost" href="${wa}" rel="noopener">WhatsApp</a></div>
     </div></div>
     <div class="sq-step" ${at(1)}><div class="sq-say">
