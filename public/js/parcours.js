@@ -1,4 +1,4 @@
-// Parcours « Du terrain à l'écran » : le film avance avec le scroll et se pose sur chaque fiche.
+// Parcours Labs : le film avance en continu avec le scroll, les étiquettes de chaque offre défilent par-dessus.
 (() => {
   const sec = document.querySelector('.sq');
   if (!sec) return;
@@ -14,15 +14,26 @@
 
   sec.classList.add('sq-on');
 
-  const ease = (x) => (x < 0.5 ? 2 * x * x : 1 - (-2 * x + 2) ** 2 / 2);
+  // Repères : position de scroll où les étiquettes de chaque arrêt passent au milieu de l'écran.
+  // Entre deux repères, le film avance en continu, sans pause.
+  let A = [];
+  function measure() {
+    const top = sec.getBoundingClientRect().top + scrollY;
+    A = steps.map((s, k) => {
+      if (k === 0) return 0;
+      const say = s.querySelector('.sq-say') || s;
+      const r = say.getBoundingClientRect();
+      return Math.max(0, r.top + scrollY - top + r.height / 2 - innerHeight / 2);
+    });
+    onScroll();
+  }
 
-  // Position du scroll → étape (entier) + avancée dans l'étape (0 à 1)
   function where() {
-    const top = sec.getBoundingClientRect().top;
-    const h = steps[0].offsetHeight || innerHeight * 2;
-    const p = Math.max(0, -top / h);
-    const i = Math.min(steps.length - 1, Math.floor(p));
-    return { i, f: i === steps.length - 1 ? 0 : p - i };
+    const y = Math.max(0, -sec.getBoundingClientRect().top);
+    let i = 0;
+    while (i < A.length - 1 && y >= A[i + 1]) i++;
+    const f = i < A.length - 1 ? (y - A[i]) / (A[i + 1] - A[i] || 1) : 0;
+    return { i, f: Math.min(1, Math.max(0, f)) };
   }
 
   function setActive(i) {
@@ -34,11 +45,10 @@
   }
 
   function onScroll() {
+    if (!A.length) return;
     const { i, f } = where();
-    // pause sur la fiche pendant la première moitié, trajet vers l'arrêt suivant pendant la seconde
-    const m = ease(Math.min(1, Math.max(0, (f - 0.5) / 0.45)));
-    target = i < T.length - 1 ? T[i] + (T[i + 1] - T[i]) * m : T[i];
-    setActive(f > 0.75 && i < steps.length - 1 ? i + 1 : i);
+    target = i < T.length - 1 ? T[i] + (T[i + 1] - T[i]) * f : T[i];
+    setActive(f > 0.5 && i < steps.length - 1 ? i + 1 : i);
     if (hint && scrollY > 40) hint.classList.add('off');
   }
 
@@ -63,9 +73,9 @@
   }
 
   addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', onScroll);
+  addEventListener('resize', measure);
   phone.addEventListener('change', load);
-  onScroll();
+  measure();
   load();
   requestAnimationFrame(tick);
 })();

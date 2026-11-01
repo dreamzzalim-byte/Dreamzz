@@ -210,8 +210,9 @@ body.labs{
 .sq-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .sq-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,11,20,.45),transparent 18%,transparent 78%,rgba(7,11,20,.55))}
 .sq-steps{position:relative;z-index:1;margin-top:-100vh;margin-top:-100svh}
-.sq-step{height:200vh;height:200svh;padding:62vh max(24px,6vw) 0;pointer-events:none}
-.sq-step[data-stop="0"]{padding-top:24vh}
+.sq-step{padding:22vh max(24px,6vw) 22vh;pointer-events:none}
+.sq-step[data-stop="0"]{padding-top:20vh;padding-bottom:30vh}
+.sq-step:last-child{padding-bottom:45vh}
 .sq-say{display:flex;flex-direction:column;align-items:flex-start;gap:12px;max-width:min(620px,100%)}
 .sq-step[data-side="r"] .sq-say{margin-left:auto;align-items:flex-end}
 .sq-say>*{pointer-events:auto}
@@ -234,11 +235,11 @@ body.labs{
 .sq-hint.off{opacity:0}
 .sq-ia{position:absolute;left:max(16px,2vw);bottom:10px;margin:0;font-size:11px;color:rgba(244,246,248,.6)}
 #faq{scroll-margin-top:80px}
-.sq-step[id]{scroll-margin-top:-38vh}
+.sq-step[id]{scroll-margin-top:-10vh}
 @media (min-width:761px){.sq-step[data-stop="2"] .sq-say{max-width:min(440px,32vw);align-items:flex-start}}
 @media (max-width:760px){
-  .sq-step{padding:64vh max(14px,env(safe-area-inset-right,0px)) 0 max(14px,env(safe-area-inset-left,0px))}
-  .sq-step[data-stop="0"]{padding-top:30vh}
+  .sq-step{padding:20vh max(14px,env(safe-area-inset-right,0px)) 20vh max(14px,env(safe-area-inset-left,0px))}
+  .sq-step[data-stop="0"]{padding-top:22vh;padding-bottom:26vh}
   .sq-step[data-side="r"] .sq-say{margin-left:0;align-items:flex-start}
   .sq-say{gap:9px}
   .sq-l{font-size:14px;padding:8px 12px;border-radius:9px}
