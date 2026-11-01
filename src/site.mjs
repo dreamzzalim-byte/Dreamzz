@@ -107,7 +107,7 @@ function page({ mode, slug, title, description, body, jsonld = '', noindex = fal
   const foot = labs ? `
       <div>
         <img src="img/labs/labs-logo-sm.webp" alt="dreamzz labs" width="130" height="34" loading="lazy">
-        <p>Packs design, sites, applis et bornes pour les commerces.</p>
+        <p>Design graphique, sites internet, interfaces et applications pour les entreprises.</p>
       </div>
       <div>
         <h3>Labs</h3>

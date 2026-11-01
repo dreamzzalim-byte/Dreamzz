@@ -26,7 +26,7 @@ Le fondateur se déplace, vit le métier du client avec son équipe, puis constr
 - Site statique généré (`build.mjs`), servi par un Worker Cloudflare ; push sur `main` = mise en ligne, seulement avec l'accord d'Abbel.
 - CSP stricte : tout est servi depuis dreamzz.fr (pas de CDN externe).
 - Grille de prix : en cours de validation (plancher 99 €, prix qui montent avec les options, l'expérience 3D est une option haut de gamme). Ne pas publier de prix non validés.
-- Tutoiement côté Labs ; vouvoiement côté Distributeurs.
+- Vouvoiement partout ; Labs : ton corporate, offres claires (Design graphique, Création d’interfaces, Site internet, Application personnalisée, Maintenance et suivi).
 - Jamais le mot « VAPE » ni de produit de vape dans la section Labs.
 
 ## Brand Commitments

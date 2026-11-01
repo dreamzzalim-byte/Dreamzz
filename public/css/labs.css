@@ -234,6 +234,8 @@ body.labs{
 .sq-hint.off{opacity:0}
 .sq-ia{position:absolute;left:max(16px,2vw);bottom:10px;margin:0;font-size:11px;color:rgba(244,246,248,.6)}
 #faq{scroll-margin-top:80px}
+.sq-step[id]{scroll-margin-top:-38vh}
+@media (min-width:761px){.sq-step[data-stop="2"] .sq-say{max-width:min(440px,32vw);align-items:flex-start}}
 @media (max-width:760px){
   .sq-step{padding:64vh max(14px,env(safe-area-inset-right,0px)) 0 max(14px,env(safe-area-inset-left,0px))}
   .sq-step[data-stop="0"]{padding-top:30vh}

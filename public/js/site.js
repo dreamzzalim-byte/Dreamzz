@@ -59,7 +59,7 @@
     out.set('type', 'autre'); out.set('offre', 'nsp'); out.set('emplacement', 'nsp'); out.set('message', msg.slice(0, 1500));
     return out;
   }
-  if (labs) { ERR.champs = 'Remplis le nom du commerce, la ville et ton nom.'; ERR.trop = 'Trop de demandes. Appelle-nous au 07 67 15 17 93.'; }
+  if (labs) { ERR.champs = 'Remplissez le nom de l’entreprise, la ville et votre nom.'; }
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!form.reportValidity()) return;
@@ -71,7 +71,7 @@
       .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
       .then(function (d) {
         if (d && d.ok) {
-          form.innerHTML = '<div class="sent" role="status"><h2>Demande envoyée</h2><p>' + (labs ? 'On te rappelle sous 24 h.' : 'On vous rappelle sous 24 h.') + '</p></div>';
+          form.innerHTML = '<div class="sent" role="status"><h2>Demande envoyée</h2><p>' + 'On vous rappelle sous 24 h.' + '</p></div>';
           window.scrollTo({ top: form.getBoundingClientRect().top + window.scrollY - 120 });
           return;
         }

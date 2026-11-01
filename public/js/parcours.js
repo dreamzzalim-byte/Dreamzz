@@ -53,7 +53,7 @@
 
   function load() {
     if (calm) return;
-    const ext = video.canPlayType('video/mp4; codecs="avc1.4D401F"') ? 'mp4' : 'webm';
+    const ext = video.canPlayType('video/webm; codecs="vp9"') ? 'webm' : 'mp4';
     const file = `${base}-${phone.matches ? 'tel' : 'pc'}.${ext}`;
     if (video.getAttribute('src') === file) return;
     ready = false;

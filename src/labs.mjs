@@ -33,8 +33,8 @@ const offer = (name, p, unit = null, from = false) => ({ '@type': 'Offer', name,
 const price = (n, u = '') => `<b class="sq-p">${n} €${u}</b>`;
 
 const STEPS = [
-  ['On écoute ton projet', '15 min au téléphone ou sur WhatsApp : ton idée, ton style, ton budget.'],
-  ['Les pistes', '4 pistes de logo. Tu choisis ta préférée.'],
+  ['Échange sur le projet', '15 min au téléphone ou sur WhatsApp : besoin, style, budget.'],
+  ['Les pistes', 'Plusieurs pistes proposées, vous choisissez.'],
   ['Retouches', '2 tours de modifs inclus.'],
   ['Tu reçois tout', 'Fichiers prêts à poster et à imprimer.'],
 ];
@@ -43,21 +43,20 @@ const CASES = [
   ['Déjà un logo ?', 'On part du tien.'],
   ['Juste un flyer ?', 'On fait juste le flyer.'],
   ['Budget serré ?', 'On adapte le pack.'],
-  ['Une idée précise ?', 'On suit ta vision.'],
+  ['Une idée précise ?', 'On suit votre vision.'],
 ];
 
 const FAQ = [
-  ['Mon projet ne rentre dans aucun pack ?', 'On compose un pack sur mesure, au prix de ton projet.'],
-  ['J’ai déjà un logo, je fais quoi ?', 'On part de ton logo et on construit le reste du pack autour.'],
-  ['Combien de temps ça prend ?', '3 jours pour l’Essentiel, 7 jours pour Réseaux, 10 jours pour Lancement, à partir de notre premier échange.'],
-  ['Comment je paie ?', '50 % à la commande, 50 % à la livraison.'],
-  ['Et si le rendu ne me plaît pas ?', 'Chaque pack inclut 2 tours de modifs.'],
-  ['Je reçois quels fichiers ?', 'Des fichiers haute définition, prêts à poster sur les réseaux et à imprimer.'],
-  ['Vous travaillez où ?', 'Partout en France, à distance : téléphone, WhatsApp et e-mail.'],
-  ['Les fichiers sont à moi ?', 'Oui. Une fois le pack réglé, tu les utilises librement pour ton commerce.'],
+  ['Quels délais ?', 'Site vitrine : 72 h. Design graphique : 3 à 10 jours. Interfaces et applications : délai donné avec le devis.'],
+  ['Mon projet ne rentre dans aucune offre ?', 'On fait un devis sur mesure, au prix du projet.'],
+  ['Comment se passe le paiement ?', '50 % à la commande, 50 % à la livraison. Prix HT.'],
+  ['Et si le rendu ne convient pas ?', 'Deux tours de modifications sont inclus.'],
+  ['À qui appartiennent les fichiers et le site ?', 'À vous : fichiers haute définition, nom de domaine à votre nom.'],
+  ['Les formules au mois engagent ?', 'Non, elles sont sans engagement.'],
+  ['Vous intervenez où ?', 'Partout en France : sur place dans le Lot-et-Garonne, à distance ailleurs.'],
 ];
 
-const NEEDS = [['essentiel', 'Pack Essentiel'], ['reseaux', 'Pack Réseaux'], ['lancement', 'Pack Lancement'], ['site', 'Site web'], ['appli', 'Appli'], ['borne', 'Borne'], ['terrain', 'Appli terrain'], ['suivi', 'Suivi au mois'], ['mesure', 'Sur mesure'], ['nsp', 'Je ne sais pas encore']];
+const NEEDS = [['design', 'Design graphique'], ['borne', 'Création d’interfaces'], ['site', 'Site internet'], ['appli', 'Application personnalisée'], ['suivi', 'Maintenance et suivi'], ['mesure', 'Autre projet'], ['nsp', 'Je ne sais pas encore']];
 const ACTIVITIES = ['Restaurant, snack', 'Coiffure, barber', 'Beauté, esthétique', 'Boutique', 'Artisan, BTP', 'Service, profession libérale', 'Autre'];
 
 // ---------------- Carrefour ----------------
@@ -66,7 +65,7 @@ export function hubPage(mode) {
   return {
     file: 'index.html', slug: '', section: 'hub', og: 'og-hub.jpg',
     title: mode === 'preview' ? 'dreamzz.fr' : 'Dreamzz · Distributeurs automatiques et studio Labs',
-    description: 'Dreamzz : distributeurs automatiques à la marque des commerçants, et Dreamzz Labs, packs design, sites et applis pour les commerces.',
+    description: 'Dreamzz : distributeurs automatiques à la marque des commerçants, et Dreamzz Labs : design, sites et applications pour les entreprises.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org', '@type': 'Organization', '@id': SITE.url + '/#org', name: 'Dreamzz', legalName: 'SAS Dreamzz', url: SITE.url,
       logo: SITE.url + '/img/icon-512.png', email: SITE.email, telephone: '+33 7 67 15 17 93',
@@ -80,7 +79,7 @@ export function hubPage(mode) {
     <span class="door-in">
       <img class="door-logo" src="img/labs/labs-logo-sm.webp" alt="dreamzz labs" width="130" height="34">
       <span class="door-k">Studio design &amp; digital</span>
-      <span class="door-h">Ton commerce, <em>on s’occupe de tout.</em></span>
+      <span class="door-h">Design, sites et applications <em>pour les entreprises.</em></span>
       <span class="door-p">Packs design, sites, applis, bornes. Dès 99 €.</span>
       <span class="btn">Découvrir Dreamzz Labs</span>
     </span>
@@ -105,7 +104,7 @@ export function labsPage(mode) {
   const wa = LABS.wa + '?text=' + encodeURIComponent('Bonjour, je veux un devis Dreamzz Labs.');
   return {
     file: 'labs.html', slug: 'labs', section: 'labs', og: 'og-labs.jpg',
-    title: 'Dreamzz Labs · Packs design, sites et applis pour les commerces',
+    title: 'Dreamzz Labs · Design, sites et applications pour les entreprises',
     description: 'Packs design dès 249 € HT, sites web dès 99 € HT, applis dès 990 € HT, bornes et applis terrain. Sur mesure, devis gratuit.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': SITE.url + '/labs#labs', name: 'Dreamzz Labs',
@@ -119,8 +118,8 @@ export function labsPage(mode) {
         offer('Entretien du site', '19', 'MON'),
         offer('Entretien du site Plus', '39', 'MON'),
         offer('Appli métier', '990', null, true),
-        offer('Borne à ta marque', '599'),
-        offer('Borne à ta marque, formule au mois', '39.99', 'MON'),
+        offer('Borne à votre marque', '599'),
+        offer('Borne à votre marque, formule au mois', '39.99', 'MON'),
         offer('Réseaux sociaux', '149', 'MON'),
       ],
     })}</script>
@@ -149,7 +148,7 @@ export function labsPage(mode) {
       <p class="sq-l">Supports print et réseaux sociaux</p>
       <p class="sq-l">Vidéo publicitaire</p>
       <p class="sq-l sq-blue">Packs dès 249 € HT</p>
-      <div class="sq-btns"><a class="btn" href="#devis" data-need="reseaux">Demander un devis</a></div>
+      <div class="sq-btns"><a class="btn" href="#devis" data-need="design">Demander un devis</a></div>
     </div></div>
     <div class="sq-step" ${at(2)}><div class="sq-say">
       <h2 class="sq-l sq-title">${zz}Création d’interfaces</h2>
@@ -187,7 +186,7 @@ export function labsPage(mode) {
 
 <section class="lx-sec lx-alt" id="exemple">
   <div class="wrap">
-    <div class="head"><div><p class="kicker">Exemple de pack</p><h2>Un pack, toute ton image</h2><p class="lead">Du logo à l’enseigne, de la story à la vidéo pub : tout est pensé ensemble.</p></div></div>
+    <div class="head"><div><p class="kicker">Exemple de pack</p><h2>Un pack, toute une image</h2><p class="lead">Du logo à l’enseigne, de la story à la vidéo pub : tout est pensé ensemble.</p></div></div>
     <div class="lx-gal">
       <figure>${picV('studio', 'Création du logo Luna Barber sur écran, au studio')}${tag('LOGO', 'xs')}</figure>
       <figure>${picV('facade', 'Enseigne lumineuse Luna Barber sur la façade, de nuit')}${tag('ENSEIGNE', 'xs')}</figure>
@@ -227,20 +226,20 @@ export function labsPage(mode) {
 
 <section class="light sec lx-devis" id="devis">
   <div class="wrap">
-    <div class="head"><div><p class="kicker">Devis gratuit</p><h2>Parle-nous de ton projet</h2><p class="lead">Réponse sous 24 h. Ou appelle directement.</p></div></div>
+    <div class="head"><div><p class="kicker">Devis gratuit</p><h2>Parlez-nous de votre projet</h2><p class="lead">Réponse sous 24 h. Ou appelez directement.</p></div></div>
     <div class="form-grid">
       <form class="form" id="devis-form" action="${SITE.devisApi}" method="post" novalidate data-labs="1"${mode === 'preview' ? ' data-preview="1"' : ''}>
-        <div class="field"><label for="l-commerce">Ton commerce</label><input id="l-commerce" name="commerce" required maxlength="120" autocomplete="organization" placeholder="Nom du commerce ou du projet"></div>
+        <div class="field"><label for="l-commerce">Entreprise</label><input id="l-commerce" name="commerce" required maxlength="120" autocomplete="organization" placeholder="Nom de l’entreprise ou du projet"></div>
         <div class="field"><label for="l-act">Activité</label>
           <select id="l-act" name="activite">${ACTIVITIES.map((a) => `<option${a === 'Autre' ? ' selected' : ''}>${a}</option>`).join('')}</select></div>
         <div class="field"><label for="l-ville">Ville</label><input id="l-ville" name="ville" required maxlength="80" autocomplete="address-level2"></div>
-        <div class="field"><label for="l-nom">Ton nom</label><input id="l-nom" name="nom" required maxlength="80" autocomplete="name"></div>
+        <div class="field"><label for="l-nom">Votre nom</label><input id="l-nom" name="nom" required maxlength="80" autocomplete="name"></div>
         <div class="field"><label for="l-tel">Téléphone</label><input id="l-tel" name="tel" type="tel" required maxlength="30" autocomplete="tel" pattern="[0-9 +.\\(\\)\\-]{9,30}"></div>
         <div class="field"><label for="l-email">E-mail <span class="opt">(facultatif)</span></label><input id="l-email" name="email" type="email" maxlength="120" autocomplete="email"></div>
-        <fieldset class="field full"><legend>Ton besoin</legend><div class="choices">${NEEDS.map(([v, t]) => `<label><input type="checkbox" name="besoin" value="${v}"> ${t}</label>`).join('')}</div></fieldset>
-        <div class="field full"><label for="l-msg">Message <span class="opt">(facultatif)</span></label><textarea id="l-msg" name="precisions" maxlength="1200" placeholder="Ton projet, ton style, ton budget, une date…"></textarea></div>
+        <fieldset class="field full"><legend>Votre besoin</legend><div class="choices">${NEEDS.map(([v, t]) => `<label><input type="checkbox" name="besoin" value="${v}"> ${t}</label>`).join('')}</div></fieldset>
+        <div class="field full"><label for="l-msg">Message <span class="opt">(facultatif)</span></label><textarea id="l-msg" name="precisions" maxlength="1200" placeholder="Votre projet, votre budget, une date…"></textarea></div>
         <div class="hp" aria-hidden="true"><label for="l-site">Site web</label><input id="l-site" name="site" tabindex="-1" autocomplete="off"></div>
-        <p class="legal">Tes coordonnées servent uniquement à te recontacter pour ce devis. <a href="${L('confidentialite')}">Confidentialité</a></p>
+        <p class="legal">Vos coordonnées servent uniquement à vous recontacter pour ce devis. <a href="${L('confidentialite')}">Confidentialité</a></p>
         <div class="form-actions"><button class="btn" type="submit">Envoyer ma demande</button><p class="form-msg" role="status" aria-live="polite"></p></div>
       </form>
       <aside class="side">
