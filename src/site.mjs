@@ -70,6 +70,7 @@ export function typo(html) {
     let s = seg.replace(/ ([?!:;»])/g, ' $1').replace(/« /g, '« ').replace(/ €/g, ' €').replace(/ %/g, ' %');
     let prev;
     do { prev = s; s = s.replace(/(\d) (\d{3})(?!\d)/g, '$1 $2'); } while (s !== prev);
+    s = s.replace(/(\d) (s|h|min|jours?|ans?)(?![\wÀ-ÿ])/g, '$1 $2').replace(/\b0\d( \d\d){4}\b/g, (m) => m.replace(/ /g, ' '));
     return s;
   }).join('');
 }

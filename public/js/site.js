@@ -23,8 +23,10 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('[data-need]');
     if (!a || !labs) return;
-    var box = form.querySelector('input[name="besoin"][value="' + a.dataset.need + '"]');
-    if (box) box.checked = true;
+    a.dataset.need.split(' ').forEach(function (v) {
+      var box = form.querySelector('input[name="besoin"][value="' + v + '"]');
+      if (box) box.checked = true;
+    });
   });
   // fermer le menu mobile après un clic sur un lien d'ancre
   if (nav) nav.addEventListener('click', function (e) {

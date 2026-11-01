@@ -18,15 +18,17 @@ const PACKS = [
 // Parcours « Du terrain à l'écran » : un film qui avance au scroll, une fiche par arrêt.
 // t = seconde du film où la caméra se pose ; side = côté libre de l'image (ordinateur) ; x = cadrage téléphone (0 à 100).
 const STOPS = [
-  { id: 'route', t: 0, side: 'l', x: 50 },
-  { id: 'barber', t: 3.1, side: 'l', x: 62 },
-  { id: 'atelier', t: 6.6, side: 'r', x: 70 },
-  { id: 'bistrot', t: 10.2, side: 'l', x: 60 },
-  { id: 'chantier', t: 13.8, side: 'l', x: 52 },
-  { id: 'aerien', t: 17.4, side: 'l', x: 50 },
+  { id: 'route', t: 0, side: 'l', v: 'c', x: 55 },
+  { id: 'barber', t: 2.208, side: 'l', v: 'c', x: 90 },
+  { id: 'atelier', t: 3.875, side: 'r', v: 'b', x: 22 },
+  { id: 'bistrot', t: 5.792, side: 'l', v: 't', x: 82 },
+  { id: 'chantier', t: 7.75, side: 'l', v: 't', x: 41 },
+  { id: 'aerien', t: 9.875, side: 'l', v: 'c', x: 50 },
 ];
 const IDS = ['', 'packs', 'applis', 'site', 'terrain', 'au-mois'];
-const at = (i) => `${IDS[i] ? `id="${IDS[i]}" ` : ''}data-stop="${i}" data-t="${STOPS[i].t}" data-side="${STOPS[i].side}" data-x="${STOPS[i].x}"`;
+const at = (i) => `${IDS[i] ? `id="${IDS[i]}" ` : ''}data-stop="${i}" data-t="${STOPS[i].t}" data-side="${STOPS[i].side}" data-v="${STOPS[i].v}" data-x="${STOPS[i].x}"`;
+const offer = (name, p, unit = null, from = false) => ({ '@type': 'Offer', name, priceCurrency: 'EUR',
+  priceSpecification: { '@type': 'UnitPriceSpecification', ...(from ? { minPrice: p } : { price: p }), priceCurrency: 'EUR', valueAddedTaxIncluded: false, ...(unit ? { unitCode: unit } : {}) } });
 const price = (n, u = '') => `<b class="sq-p">${n} €${u}</b>`;
 
 const STEPS = [
@@ -109,7 +111,17 @@ export function labsPage(mode) {
       parentOrganization: { '@id': SITE.url + '/#org' }, url: SITE.url + '/labs', image: SITE.url + '/img/og-labs.jpg',
       telephone: '+33 7 67 15 17 93', email: SITE.email, areaServed: 'FR',
       address: { '@type': 'PostalAddress', addressLocality: 'Estillac', postalCode: '47310', addressCountry: 'FR' },
-      makesOffer: PACKS.map((p) => ({ '@type': 'Offer', name: 'Pack design ' + p.name, price: p.price, priceCurrency: 'EUR', priceSpecification: { '@type': 'UnitPriceSpecification', price: p.price, priceCurrency: 'EUR', valueAddedTaxIncluded: false } })),
+      makesOffer: [
+        ...PACKS.map((p) => offer('Pack design ' + p.name, p.price)),
+        offer('Design à la carte', '99', null, true),
+        offer('Site Express', '99'),
+        offer('Entretien du site', '19', 'MON'),
+        offer('Entretien du site Plus', '39', 'MON'),
+        offer('Appli métier', '990', null, true),
+        offer('Borne à ta marque', '599'),
+        offer('Borne à ta marque, formule au mois', '39.99', 'MON'),
+        offer('Réseaux sociaux', '149', 'MON'),
+      ],
     })}</script>
 <script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org', '@type': 'FAQPage',
@@ -148,13 +160,13 @@ export function labsPage(mode) {
         <li><span><b>Borne à ta marque</b><small>Écran de la borne et appli de gestion</small></span>${price('599')}</li>
       </ul>
       <p class="sq-note">Borne aussi en formule à 39,99 €/mois · Prix HT</p>
-      <a class="btn" href="#devis" data-need="appli">Parler de mon projet</a>
+      <a class="btn" href="#devis" data-need="appli borne">Parler de mon projet</a>
     </article></div></div>
     <div class="sq-step" ${at(3)}><div class="sq-pin"><article class="sq-card">
       ${tag('SITE WEB', 'xs sq-tag')}
       <h2>En ligne en 72 h.</h2>
       <ul class="sq-list">
-        <li><span><b>Site Express</b><small>1 page, domaine à ton nom</small></span><span class="sq-from">${price('99')} <small>+ 19 €/mois</small></span></li>
+        <li><span><b>Site Express</b><small>1 page, domaine à ton nom, entretien inclus</small></span><span class="sq-from">${price('99')} <small>puis 19 €/mois</small></span></li>
       </ul>
       <p class="sq-note">Options : pages, réservation, fiche Google, animations · Prix HT</p>
       <a class="btn" href="#devis" data-need="site">Lancer mon site</a>
@@ -171,7 +183,7 @@ export function labsPage(mode) {
       <h2>On reste à côté de toi.</h2>
       <ul class="sq-list">
         <li><span><b>Réseaux</b><small>4 posts par mois, visuels inclus</small></span>${price('149', '/mois')}</li>
-        <li><span><b>Entretien du site</b><small>Mises à jour, petites modifs avec Plus</small></span><span class="sq-from">${price('19', '/mois')} <small>ou 39 €</small></span></li>
+        <li><span><b>Entretien du site</b><small>Base : mises à jour · Plus : petites modifs</small></span><span class="sq-from">${price('19', '/mois')} <small>Plus : 39 €/mois</small></span></li>
       </ul>
       <p class="sq-note">Sans engagement · Prix HT</p>
       <div class="btns"><a class="btn" href="#devis" data-need="suivi">Devis gratuit</a><a class="btn btn-ghost" href="tel:${SITE.telHref}">${SITE.tel}</a></div>
