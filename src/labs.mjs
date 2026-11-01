@@ -18,14 +18,15 @@ const PACKS = [
 // Parcours « Du terrain à l'écran » : un film qui avance au scroll, une fiche par arrêt.
 // t = seconde du film où la caméra se pose ; side = côté libre de l'image (ordinateur) ; x = cadrage téléphone (0 à 100).
 const STOPS = [
-  { id: 'route', t: 0, side: 'l', v: 'c', x: 55 },
-  { id: 'barber', t: 2.208, side: 'l', v: 'c', x: 90 },
-  { id: 'atelier', t: 3.875, side: 'r', v: 'b', x: 22 },
-  { id: 'bistrot', t: 5.792, side: 'l', v: 't', x: 82 },
-  { id: 'chantier', t: 7.75, side: 'l', v: 't', x: 41 },
+  { id: 'route', t: 0, side: 'l', v: 'c', x: 54 },
+  { id: 'barber', t: 2.208, side: 'l', v: 'c', x: 83 },
+  { id: 'atelier', t: 3.875, side: 'r', v: 'b', x: 15 },
+  { id: 'bistrot', t: 5.792, side: 'l', v: 't', x: 87 },
+  { id: 'chantier', t: 7.75, side: 'l', v: 't', x: 33 },
   { id: 'aerien', t: 9.875, side: 'l', v: 'c', x: 50 },
 ];
-const IDS = ['', 'packs', 'applis', 'site', 'terrain', 'au-mois'];
+const IDS = ['', 'design', 'interfaces', 'site', 'application', 'suivi'];
+const zz = '<i class="sq-zz" aria-hidden="true"><img src="img/labs/zz.webp" alt="" width="40" height="34"></i>';
 const at = (i) => `${IDS[i] ? `id="${IDS[i]}" ` : ''}data-stop="${i}" data-t="${STOPS[i].t}" data-side="${STOPS[i].side}" data-v="${STOPS[i].v}" data-x="${STOPS[i].x}"`;
 const offer = (name, p, unit = null, from = false) => ({ '@type': 'Offer', name, priceCurrency: 'EUR',
   priceSpecification: { '@type': 'UnitPriceSpecification', ...(from ? { minPrice: p } : { price: p }), priceCurrency: 'EUR', valueAddedTaxIncluded: false, ...(unit ? { unitCode: unit } : {}) } });
@@ -128,7 +129,7 @@ export function labsPage(mode) {
       mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
     })}</script>\n`,
     body: `
-<section class="sq" id="parcours" aria-label="Nos offres, du terrain à l’écran">
+<section class="sq" id="parcours" aria-label="Nos offres">
   <div class="sq-stage">
     <video class="sq-video" muted playsinline preload="auto" poster="img/labs/parcours/arret-0.webp" data-src="img/labs/parcours/parcours" aria-hidden="true"></video>
     <div class="sq-shade"></div>
@@ -137,57 +138,50 @@ export function labsPage(mode) {
     <p class="sq-ia">Images générées par IA.</p>
   </div>
   <div class="sq-steps">
-    <div class="sq-step" ${at(0)}><div class="sq-pin"><article class="sq-card sq-intro">
-      <p class="kicker">Dreamzz Labs</p>
-      <h1>Du terrain <span class="accent">à l’écran.</span></h1>
-      <p class="lead">Design, sites, applis et bornes, pour les commerces et les équipes. Sur mesure.</p>
-      <div class="btns"><a class="btn" href="#devis">Devis gratuit</a><a class="btn btn-ghost" href="${wa}" rel="noopener">WhatsApp</a></div>
-    </article></div></div>
-    <div class="sq-step" ${at(1)}><div class="sq-pin"><article class="sq-card">
-      ${tag('PACKS DESIGN', 'xs sq-tag')}
-      <h2>Toute ton image, d’un coup.</h2>
-      <ul class="sq-list">${PACKS.map((p) => `
-        <li class="${p.top ? 'is-top' : ''}"><span><b>${p.name}</b><small>${p.items.filter((i) => !i.startsWith('Tout')).join(' · ')}</small></span>${price(p.price)}</li>`).join('')}
-      </ul>
-      <p class="sq-note">À la carte dès 99 € · Prix HT · 2 tours de modifs inclus</p>
-      <a class="btn" href="#devis" data-need="reseaux">Choisir mon pack</a>
-    </article></div></div>
-    <div class="sq-step" ${at(2)}><div class="sq-pin"><article class="sq-card">
-      ${tag('APPLIS ET BORNES', 'xs sq-tag')}
-      <h2>Ta borne, ton appli, ta gestion.</h2>
-      <ul class="sq-list">
-        <li><span><b>Appli métier</b><small>Stock, planning, rapports, sur téléphone</small></span><span class="sq-from">dès ${price('990')}</span></li>
-        <li><span><b>Borne à ta marque</b><small>Écran de la borne et appli de gestion</small></span>${price('599')}</li>
-      </ul>
-      <p class="sq-note">Borne aussi en formule à 39,99 €/mois · Prix HT</p>
-      <a class="btn" href="#devis" data-need="appli borne">Parler de mon projet</a>
-    </article></div></div>
-    <div class="sq-step" ${at(3)}><div class="sq-pin"><article class="sq-card">
-      ${tag('SITE WEB', 'xs sq-tag')}
-      <h2>En ligne en 72 h.</h2>
-      <ul class="sq-list">
-        <li><span><b>Site Express</b><small>1 page, domaine à ton nom, entretien inclus</small></span><span class="sq-from">${price('99')} <small>puis 19 €/mois</small></span></li>
-      </ul>
-      <p class="sq-note">Options : pages, réservation, fiche Google, animations · Prix HT</p>
-      <a class="btn" href="#devis" data-need="site">Lancer mon site</a>
-    </article></div></div>
-    <div class="sq-step" ${at(4)}><div class="sq-pin"><article class="sq-card">
-      ${tag('APPLIS TERRAIN', 'xs sq-tag')}
-      <h2>Pensé pour le terrain.</h2>
-      <p class="lead">Rapports, plannings, signatures. Ça marche de nuit, sans réseau, avec des gants.</p>
-      <p class="sq-note">Exemple : une appli de perchage ferroviaire, utilisée chaque nuit. Sur devis.</p>
-      <a class="btn" href="#devis" data-need="terrain">Parler de mon équipe</a>
-    </article></div></div>
-    <div class="sq-step" ${at(5)}><div class="sq-pin"><article class="sq-card">
-      ${tag('AU MOIS', 'xs sq-tag')}
-      <h2>On reste à côté de toi.</h2>
-      <ul class="sq-list">
-        <li><span><b>Réseaux</b><small>4 posts par mois, visuels inclus</small></span>${price('149', '/mois')}</li>
-        <li><span><b>Entretien du site</b><small>Base : mises à jour · Plus : petites modifs</small></span><span class="sq-from">${price('19', '/mois')} <small>Plus : 39 €/mois</small></span></li>
-      </ul>
-      <p class="sq-note">Sans engagement · Prix HT</p>
-      <div class="btns"><a class="btn" href="#devis" data-need="suivi">Devis gratuit</a><a class="btn btn-ghost" href="tel:${SITE.telHref}">${SITE.tel}</a></div>
-    </article></div></div>
+    <div class="sq-step" ${at(0)}><div class="sq-say">
+      <h1 class="sq-l sq-big">Du terrain <span>à l’écran.</span></h1>
+      <p class="sq-l sq-blue">Design graphique · Sites internet · Interfaces · Applications</p>
+      <div class="sq-btns"><a class="btn" href="#devis">Demander un devis</a><a class="btn btn-ghost" href="${wa}" rel="noopener">WhatsApp</a></div>
+    </div></div>
+    <div class="sq-step" ${at(1)}><div class="sq-say">
+      <h2 class="sq-l sq-title">${zz}Design graphique</h2>
+      <p class="sq-l">Logo et identité visuelle</p>
+      <p class="sq-l">Supports print et réseaux sociaux</p>
+      <p class="sq-l">Vidéo publicitaire</p>
+      <p class="sq-l sq-blue">Packs dès 249 € HT</p>
+      <div class="sq-btns"><a class="btn" href="#devis" data-need="reseaux">Demander un devis</a></div>
+    </div></div>
+    <div class="sq-step" ${at(2)}><div class="sq-say">
+      <h2 class="sq-l sq-title">${zz}Création d’interfaces</h2>
+      <p class="sq-l">Écrans de bornes et de caisses</p>
+      <p class="sq-l">Paiement et suivi des ventes</p>
+      <p class="sq-l">Tableau de bord de gestion</p>
+      <p class="sq-l sq-blue">599 € HT ou 39,99 € HT/mois</p>
+      <div class="sq-btns"><a class="btn" href="#devis" data-need="borne">Demander un devis</a></div>
+    </div></div>
+    <div class="sq-step" ${at(3)}><div class="sq-say">
+      <h2 class="sq-l sq-title">${zz}Site internet</h2>
+      <p class="sq-l">Site vitrine livré en 72 h</p>
+      <p class="sq-l">Nom de domaine et hébergement inclus</p>
+      <p class="sq-l">Adapté au mobile</p>
+      <p class="sq-l sq-blue">99 € HT, puis 19 € HT/mois</p>
+      <div class="sq-btns"><a class="btn" href="#devis" data-need="site">Demander un devis</a></div>
+    </div></div>
+    <div class="sq-step" ${at(4)}><div class="sq-say">
+      <h2 class="sq-l sq-title">${zz}Application personnalisée</h2>
+      <p class="sq-l">Application web et mobile</p>
+      <p class="sq-l">Rapports, plannings, signatures</p>
+      <p class="sq-l">Fonctionne hors connexion</p>
+      <p class="sq-l sq-blue">Dès 990 € HT</p>
+      <div class="sq-btns"><a class="btn" href="#devis" data-need="appli">Demander un devis</a></div>
+    </div></div>
+    <div class="sq-step" ${at(5)}><div class="sq-say">
+      <h2 class="sq-l sq-title">${zz}Maintenance et suivi</h2>
+      <p class="sq-l">Gestion des réseaux sociaux : 149 € HT/mois</p>
+      <p class="sq-l">Maintenance du site : dès 19 € HT/mois</p>
+      <p class="sq-l sq-blue">Sans engagement</p>
+      <div class="sq-btns"><a class="btn" href="#devis" data-need="suivi">Demander un devis</a><a class="btn btn-ghost" href="tel:${SITE.telHref}">${SITE.tel}</a></div>
+    </div></div>
   </div>
 </section>
 

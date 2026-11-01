@@ -17,10 +17,10 @@ export const SITE = {
 export const LABS = {
   wa: 'https://wa.me/33767151793',
   nav: [
-    { hash: 'packs', label: 'Packs design' },
-    { hash: 'applis', label: 'Applis et bornes' },
-    { hash: 'site', label: 'Site web' },
-    { hash: 'terrain', label: 'Terrain' },
+    { hash: 'design', label: 'Design graphique' },
+    { hash: 'interfaces', label: 'Interfaces' },
+    { hash: 'site', label: 'Site internet' },
+    { hash: 'application', label: 'Applications' },
     { hash: 'faq', label: 'FAQ' },
   ],
 };
