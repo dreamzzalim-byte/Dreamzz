@@ -123,7 +123,7 @@ export function pages(mode) {
   // ---------------- Distributeurs : accueil ----------------
   out.push({
     file: 'distributeurs.html', slug: 'distributeurs',
-    title: 'Dreamzz · Distributeur de vape à la marque de votre magasin',
+    title: 'Distributeur automatique de vape à votre marque · Dreamzz',
     description: 'Distributeur automatique de vape mural, en façade ou en boutique, avec le nom et le logo de votre magasin à l’écran. Contrôle d’âge, paiement par carte, appli de gestion. Toutes les ventes sont pour vous.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org',

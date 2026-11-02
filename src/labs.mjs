@@ -64,8 +64,8 @@ export function hubPage(mode) {
   const L = makeLink(mode);
   return {
     file: 'index.html', slug: '', section: 'hub', og: 'og-hub.jpg',
-    title: mode === 'preview' ? 'dreamzz.fr' : 'Dreamzz · Distributeurs automatiques et studio Labs',
-    description: 'Dreamzz : distributeurs automatiques à la marque des commerçants, et Dreamzz Labs : design, sites et applications pour les entreprises.',
+    title: mode === 'preview' ? 'dreamzz.fr' : 'Dreamzz · Distributeurs automatiques et studio web · Agen (47)',
+    description: 'Dreamzz, près d’Agen : distributeurs automatiques à la marque des commerçants, et Dreamzz Labs : création de sites internet, logos, flyers et applications.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org', '@type': 'Organization', '@id': SITE.url + '/#org', name: 'Dreamzz', legalName: 'SAS Dreamzz', url: SITE.url,
       logo: SITE.url + '/img/icon-512.png', email: SITE.email, telephone: '+33 7 67 15 17 93',
@@ -104,13 +104,15 @@ export function labsPage(mode) {
   const wa = LABS.wa + '?text=' + encodeURIComponent('Bonjour, je veux un devis Dreamzz Labs.');
   return {
     file: 'labs.html', slug: 'labs', section: 'labs', og: 'og-labs.jpg',
-    title: 'Dreamzz Labs · Design, sites et applications pour les entreprises',
-    description: 'Packs design dès 249 € HT, sites web dès 99 € HT, applis dès 990 € HT, bornes et applis terrain. Sur mesure, devis gratuit.',
+    title: 'Création de site internet, logo et flyers · Agen · Dreamzz Labs',
+    description: 'Studio près d’Agen (Lot-et-Garonne) : sites internet, logos, flyers, visuels réseaux, vidéos pub et applications pour les commerces. Devis gratuit sous 24 h.',
     jsonld: `<script type="application/ld+json">${JSON.stringify({
       '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': SITE.url + '/labs#labs', name: 'Dreamzz Labs',
       parentOrganization: { '@id': SITE.url + '/#org' }, url: SITE.url + '/labs', image: SITE.url + '/img/og-labs.jpg',
-      telephone: '+33 7 67 15 17 93', email: SITE.email, areaServed: 'FR',
-      address: { '@type': 'PostalAddress', addressLocality: 'Estillac', postalCode: '47310', addressCountry: 'FR' },
+      telephone: '+33 7 67 15 17 93', email: SITE.email,
+      areaServed: [{ '@type': 'City', name: 'Agen' }, { '@type': 'City', name: 'Villeneuve-sur-Lot' }, { '@type': 'City', name: 'Marmande' }, { '@type': 'AdministrativeArea', name: 'Lot-et-Garonne' }, { '@type': 'Country', name: 'France' }],
+      sameAs: ['https://www.instagram.com/dreamzzlabs', 'https://www.tiktok.com/@dreamzzlabs'],
+      address: { '@type': 'PostalAddress', addressLocality: 'Estillac', postalCode: '47310', addressRegion: 'Nouvelle-Aquitaine', addressCountry: 'FR' },
       makesOffer: [
         ...PACKS.map((p) => offer('Pack design ' + p.name, p.price)),
         offer('Design à la carte', '99', null, true),
