@@ -34,6 +34,14 @@ body.labs{
 .labs .light .link{color:var(--violet-ink)}
 .labs .top{background:rgba(7,11,20,.9);border-bottom-color:rgba(125,211,252,.12)}
 .labs .logo img{height:34px}
+/* logo animé : il glisse en place à l'ouverture, puis un reflet de verre le traverse toutes les 6 s */
+.labs .logo{position:relative;display:inline-flex;animation:logo-in .9s cubic-bezier(.2,.8,.2,1) both}
+.labs .logo::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 36%,rgba(56,189,248,.95) 45%,#fff 50%,rgba(56,189,248,.95) 55%,transparent 64%) no-repeat;background-size:300% 100%;background-position:120% 0;-webkit-mask:url(../img/labs/labs-logo-sm.webp) left center/auto 100% no-repeat;mask:url(../img/labs/labs-logo-sm.webp) left center/auto 100% no-repeat;animation:logo-shine 6s ease-in-out 1.2s infinite}
+.labs .logo:hover img{filter:drop-shadow(0 0 10px rgba(125,211,252,.75))}
+.labs .logo img{transition:filter .3s}
+@keyframes logo-in{from{opacity:0;transform:translateY(-6px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes logo-shine{0%{background-position:120% 0}22%,100%{background-position:-20% 0}}
+@media (prefers-reduced-motion:reduce){.labs .logo,.labs .logo::after{animation:none}}
 .labs .nav a{font-weight:500}
 .labs .nav a.btn{color:#04111C}
 .labs .dots li::before{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}

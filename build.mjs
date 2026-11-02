@@ -1,7 +1,8 @@
 // Génère le site dans public/ (en ligne) ou dans un dossier d'aperçu.
 //   node build.mjs                 → public/ (liens propres : /offres)
 //   node build.mjs --preview <dir> → <dir>/ (liens en .html, pour un aperçu hors Cloudflare)
-import { writeFileSync, mkdirSync, cpSync, existsSync } from 'node:fs';
+import { writeFileSync, mkdirSync, cpSync, existsSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { layout, SITE } from './src/site.mjs';
 import { pages } from './src/pages.mjs';
@@ -13,8 +14,15 @@ if (!out) throw new Error('dossier d’aperçu manquant');
 mkdirSync(out, { recursive: true });
 if (mode === 'preview') for (const d of ['css', 'js', 'img', 'fonts']) cpSync(join('public', d), join(out, d), { recursive: true });
 
+// CSS et JS sont gardés en cache par les navigateurs (7 j / 1 j) : chaque lien porte l'empreinte du fichier (?v=…),
+// pour qu'une mise en ligne soit vue tout de suite par tout le monde
+const stamp = {};
+const version = (html) => html.replace(/((?:href|src)=")(\/?)((?:css|js)\/[\w.-]+\.(?:css|js))"/g, (m, a, slash, path) => {
+  stamp[path] ??= createHash('sha1').update(readFileSync(join('public', path))).digest('hex').slice(0, 8);
+  return `${a}${slash}${path}?v=${stamp[path]}"`;
+});
 const list = pages(mode);
-for (const p of list) writeFileSync(join(out, p.file), layout({ mode, ...p }));
+for (const p of list) writeFileSync(join(out, p.file), version(layout({ mode, ...p })));
 
 if (mode === 'prod') {
   const day = new Date().toISOString().slice(0, 10);
