@@ -2,18 +2,18 @@
 (async () => {
   const N = 200, SRC = (k) => 'img/' + String(k).padStart(3, '0') + '.webp';
   const LEG = [
-    { id: 'ecran', de: 10, a: 34, t: 'Écran tactile', s: 'Vos produits et vos prix, modifiables à distance' },
-    { id: 'led', de: 30, a: 62, t: 'Éclairage LED', s: 'Un halo visible de loin, la nuit' },
-    { id: 'fixation', de: 66, a: 104, t: 'Fixation murale', s: 'Sur la façade ou dans la boutique' },
-    { id: 'trappe', de: 118, a: 146, t: 'Trappe de retrait', s: 'Le produit tombe ici' },
-    { id: 'id', de: 140, a: 164, t: "Lecteur de carte d'identité", s: "Contrôle de l'âge du client" },
-    { id: 'paiement', de: 158, a: 184, t: 'Paiement sans contact', s: 'Carte, téléphone ou montre' },
+    { id: 'ecran', de: 6, a: 26, t: 'Écran tactile', s: 'Vos produits et vos prix, modifiables à distance' },
+    { id: 'led', de: 24, a: 48, t: 'Éclairage LED', s: 'Un halo visible de loin, la nuit' },
+    { id: 'fixation', de: 46, a: 74, t: 'Fixation murale', s: 'Sur la façade ou dans la boutique' },
+    { id: 'trappe', de: 100, a: 126, t: 'Trappe de retrait', s: 'Le produit tombe ici' },
+    { id: 'id', de: 122, a: 148, t: "Lecteur de carte d'identité", s: "Contrôle de l'âge du client" },
+    { id: 'paiement', de: 144, a: 172, t: 'Paiement sans contact', s: 'Carte, téléphone ou montre' },
   ];
   const P = await fetch('img/legendes.json').then((r) => r.json());
   const tour = document.querySelector('.tour'), cv = document.querySelector('canvas'), g = cv.getContext('2d');
   const svg = document.querySelector('svg.traits'), scene = document.querySelector('.scene'), indice = document.querySelector('.indice');
   const titres = [...document.querySelectorAll('.titre')];
-  const NS = 'http://www.w3.org/2000/svg';
+  const NS = 'http://www.w3.org/2000/svg', FOND = 'rgb(189,188,186)';
   LEG.forEach((L) => {
     L.el = document.createElement('div'); L.el.className = 'leg'; L.el.innerHTML = `<b>${L.t}</b><span>${L.s}</span>`; scene.appendChild(L.el);
     L.halo = document.createElementNS(NS, 'polyline'); L.trait = document.createElementNS(NS, 'polyline'); L.pt = document.createElementNS(NS, 'circle');
@@ -84,6 +84,13 @@
     if (ia < 0) return;
     g.clearRect(0, 0, cv.width, cv.height); peindre(imgs[ia], 1);
     if (t > 0.01 && ok(b) && b !== ia) peindre(imgs[b], t);
+    if (box.x > 1) {   // image entière sur PC : on fond ses bords gauche/droite dans le fond du studio
+      const f = box.w * 0.16, X = box.x * R, Wd = box.w * R, F = f * R;
+      for (const [x0, x1] of [[X, X + F], [X + Wd, X + Wd - F]]) {
+        const gr = g.createLinearGradient(x0, 0, x1, 0); gr.addColorStop(0, FOND); gr.addColorStop(1, 'rgba(189,188,186,0)');
+        g.fillStyle = gr; g.fillRect(Math.min(x0, x1), 0, F, cv.height);
+      }
+    }
     legendes(f);
   }
   function scroll() {
