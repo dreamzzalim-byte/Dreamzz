@@ -2,7 +2,9 @@
 (() => {
   const N = 101, SRC = (k) => 'img/' + String(k).padStart(3, '0') + '.webp';
   const sec = document.querySelector('.b3'), cv = document.querySelector('.b3-canvas'), g = cv.getContext('2d');
-  const steps = [...document.querySelectorAll('.b3-step')], hint = document.querySelector('.b3-hint');
+  const stage = document.querySelector('.b3-stage'), steps = [...document.querySelectorAll('.b3-say')];
+  steps.forEach((el) => stage.appendChild(el));
+  const _unused = [...document.querySelectorAll('.b3-step')], hint = document.querySelector('.b3-hint');
   const imgs = new Array(N); let cur = 0, target = 0, last = -1;
   const load = (k) => { if (imgs[k]) return; const im = new Image(); im.decoding = 'async'; im.src = SRC(k); im.onload = () => { last = -1; }; imgs[k] = im; };
   load(0); for (let k = 0; k < N; k += 10) load(k); for (let k = 0; k < N; k++) load(k);
