@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Borne Dreamzz — tour 3D</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:'Big Shoulders Display';font-weight:900;src:url(big-shoulders-display-latin-900-normal.woff2)}
+@font-face{font-family:Barlow;font-weight:500;src:url(barlow-latin-500-normal.woff2)}
+@font-face{font-family:Barlow;font-weight:600;src:url(barlow-latin-600-normal.woff2)}
+@font-face{font-family:Barlow;font-weight:700;src:url(barlow-latin-700-normal.woff2)}
+:root{--fond:#bdbcba;--ink:#0d0d0f;--soft:#3d3c3a;--trait:#0d0d0f}
+*{box-sizing:border-box;margin:0}
+html,body{background:var(--fond);color:var(--ink);font-family:Barlow,sans-serif}
+.top{position:fixed;inset:0 0 auto;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:18px max(16px,3vw)}
+.top img{height:30px;filter:brightness(0)}
+.top a{color:var(--ink);font-weight:700;font-size:14px;letter-spacing:.06em;text-decoration:none;border:1.5px solid var(--ink);padding:10px 16px;border-radius:999px}
+.tour{position:relative;height:620vh}
+.scene{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+canvas{display:block;width:100%;height:100%}
+svg.traits{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.leg{position:absolute;max-width:min(52vw,250px);pointer-events:none;background:rgba(244,243,241,.94);padding:10px 13px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.leg b{display:block;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.leg span{display:block;font-weight:500;font-size:13px;line-height:1.3;color:var(--soft);margin-top:3px}
+.leg.d{text-align:right}
+.titre{position:absolute;left:max(16px,6vw);right:max(16px,6vw);transition:opacity .25s linear}
+.titre.h{top:calc(78px + env(safe-area-inset-top,0px))}
+.titre.b{bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+.titre p{font-weight:700;font-size:13px;letter-spacing:.24em;text-transform:uppercase}
+.titre h1,.titre h2{font-family:'Big Shoulders Display',Impact,sans-serif;font-weight:900;font-size:clamp(44px,7vw,96px);line-height:.92;text-transform:uppercase;margin-top:6px}
+.titre .cta{display:inline-block;margin-top:16px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;font-size:15px;letter-spacing:.06em;padding:14px 22px;border-radius:999px}
+.indice{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:8px;border:0;background:none;color:var(--ink);font:700 11px Barlow,sans-serif;letter-spacing:.28em;text-transform:uppercase;cursor:pointer;transition:opacity .3s}
+.indice i{display:block;width:1.5px;height:40px;background:linear-gradient(var(--ink),transparent);position:relative}
+.indice i::after{content:"";position:absolute;left:-3px;top:0;width:8px;height:8px;border-radius:50%;background:var(--ink);animation:tombe 1.6s ease-in-out infinite}
+@keyframes tombe{0%{top:0;opacity:0}20%{opacity:1}100%{top:34px;opacity:0}}
+.indice.off{opacity:0;pointer-events:none}
+.apres{min-height:60vh;display:grid;place-items:center;font-size:18px;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){.leg,.titre,.indice{transition:none}.indice i::after{animation:none}}
+</style></head><body>
+<header class="top"><img src="labs-logo-sm.webp" alt="dreamzz"><a href="#">Devis gratuit</a></header>
+<section class="tour" aria-label="La borne Dreamzz, vue sous tous les angles">
+  <div class="scene">
+    <canvas aria-hidden="true"></canvas>
+    <svg class="traits" aria-hidden="true"></svg>
+    <div class="titre h" data-de="0" data-a="14"><p>Distributeur automatique</p><h1>La borne<br>Dreamzz</h1></div>
+    <div class="titre b" data-de="182" data-a="199"><p>Distributeur Dreamzz</p><h2>Votre commerce,<br>ouvert 24 h/24</h2><a class="cta" href="#">Devis gratuit</a></div>
+  </div>
+</section>
+<button class="indice" type="button" aria-label="Voir la suite"><span>Faites défiler</span><i></i></button>
+<div class="apres">Suite de la page…</div>
+<script src="tour.js"></script>
+</body></html>
