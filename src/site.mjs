@@ -18,7 +18,7 @@ export const LABS = {
   wa: 'https://wa.me/33767151793',
   nav: [
     { hash: 'design', label: 'Design graphique' },
-    { hash: 'interfaces', label: 'Interfaces' },
+    { hash: 'logiciel', label: 'Logiciel sur mesure' },
     { hash: 'site', label: 'Site internet' },
     { hash: 'application', label: 'Applications' },
     { hash: 'faq', label: 'FAQ' },
@@ -107,7 +107,7 @@ function page({ mode, slug, title, description, body, jsonld = '', noindex = fal
   const foot = labs ? `
       <div>
         <img src="img/labs/labs-logo-sm.webp" alt="dreamzz labs" width="130" height="34" loading="lazy">
-        <p>Design graphique, sites internet, interfaces et applications pour les entreprises.</p>
+        <p>Design graphique, sites internet, logiciels sur mesure et applications pour les entreprises.</p>
       </div>
       <div>
         <h3>Labs</h3>

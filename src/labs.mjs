@@ -25,7 +25,7 @@ const STOPS = [
   { id: 'chantier', t: 8, side: 'l', v: 't', x: 50 },
   { id: 'qg', t: 10, side: 'l', v: 'c', x: 50 },
 ];
-const IDS = ['', 'design', 'interfaces', 'site', 'application', 'suivi'];
+const IDS = ['', 'design', 'logiciel', 'site', 'application', 'suivi'];
 const zz = '<i class="sq-zz" aria-hidden="true"><img src="img/labs/zz.webp" alt="" width="40" height="34"></i>';
 const at = (i) => `${IDS[i] ? `id="${IDS[i]}" ` : ''}data-stop="${i}" data-t="${STOPS[i].t}" data-side="${STOPS[i].side}" data-v="${STOPS[i].v}" data-x="${STOPS[i].x}"`;
 const offer = (name, p, unit = null, from = false) => ({ '@type': 'Offer', name, priceCurrency: 'EUR',
@@ -47,7 +47,7 @@ const CASES = [
 ];
 
 const FAQ = [
-  ['Quels délais ?', 'Site vitrine : 72 h. Design graphique : 3 à 10 jours. Interfaces et applications : délai donné avec le devis.'],
+  ['Quels délais ?', 'Site vitrine : 72 h. Design graphique : 3 à 10 jours. Logiciel sur mesure et applications : délai donné avec le devis.'],
   ['Mon projet ne rentre dans aucune offre ?', 'On fait un devis sur mesure, au prix du projet.'],
   ['Comment se passe le paiement ?', '50 % à la commande, 50 % à la livraison. Prix HT.'],
   ['Et si le rendu ne convient pas ?', 'Deux tours de modifications sont inclus.'],
@@ -56,7 +56,7 @@ const FAQ = [
   ['Vous intervenez où ?', 'Partout en France : sur place dans le Lot-et-Garonne, à distance ailleurs.'],
 ];
 
-const NEEDS = [['design', 'Design graphique'], ['borne', 'Création d’interfaces'], ['site', 'Site internet'], ['appli', 'Application personnalisée'], ['suivi', 'Maintenance et suivi'], ['mesure', 'Autre projet'], ['nsp', 'Je ne sais pas encore']];
+const NEEDS = [['design', 'Design graphique'], ['borne', 'Logiciel sur mesure'], ['site', 'Site internet'], ['appli', 'Application personnalisée'], ['suivi', 'Maintenance et suivi'], ['mesure', 'Autre projet'], ['nsp', 'Je ne sais pas encore']];
 const ACTIVITIES = ['Restaurant, snack', 'Coiffure, barber', 'Beauté, esthétique', 'Boutique', 'Artisan, BTP', 'Service, profession libérale', 'Autre'];
 
 // ---------------- Carrefour ----------------
@@ -152,7 +152,7 @@ export function labsPage(mode) {
       <div class="sq-btns"><a class="btn" href="#devis" data-need="design">Demander un devis</a></div>
     </div></div>
     <div class="sq-step" ${at(2)}><div class="sq-say">
-      <h2 class="sq-l sq-title">${zz}Création d’interfaces</h2>
+      <h2 class="sq-l sq-title">${zz}Logiciel sur mesure</h2>
       <p class="sq-l">Écrans de bornes et de caisses</p>
       <p class="sq-l">Paiement et suivi des ventes</p>
       <p class="sq-l">Tableau de bord de gestion</p>
