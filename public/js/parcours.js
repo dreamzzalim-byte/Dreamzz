@@ -90,7 +90,7 @@
   // ---- repères : chaque étape occupe une hauteur de scroll ; le film reste posé sur l'arrêt pendant
   // la première partie (le mot en verre se lit), puis avance vers l'arrêt suivant
   const HOLD = 0.6;
-  let O = [];
+  let O = [], hintT = 0;
   function measure() {
     const top = sec.getBoundingClientRect().top + scrollY;
     O = steps.map((st) => st.getBoundingClientRect().top + scrollY - top);
@@ -112,7 +112,11 @@
     }
     target = t * FPS;
     if (a !== active) { active = a; dots.forEach((el, k) => el.classList.toggle('on', k === a)); }
-    if (hint && scrollY > 40) hint.classList.add('off');
+    if (hint) {
+      // la flèche disparaît pendant le défilement et revient quand on s'arrête (sauf à la dernière offre)
+      hint.classList.add('off'); clearTimeout(hintT);
+      hintT = setTimeout(() => { if (active < steps.length - 1 && sec.getBoundingClientRect().bottom > innerHeight) hint.classList.remove('off'); }, 700);
+    }
   }
 
   // fondu correct entre deux images : les deux fonds, puis les deux images
@@ -147,6 +151,12 @@
     requestAnimationFrame(tick);
   }
 
+  // clic sur la flèche : on descend jusqu'à l'offre suivante
+  if (hint) hint.addEventListener('click', () => {
+    const top = sec.getBoundingClientRect().top + scrollY;
+    const n = Math.min(O.length - 1, active + 1);
+    scrollTo({ top: top + O[n] + 2, behavior: calm ? 'auto' : 'smooth' });
+  });
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', measure);
   phone.addEventListener('change', () => { load(); measure(); });

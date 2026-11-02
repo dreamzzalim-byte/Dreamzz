@@ -133,8 +133,7 @@ export function labsPage(mode) {
     <canvas class="sq-film" data-src="img/labs/parcours8/" data-pc-stills="img/labs/parcours8/pc6/" data-frames="6" data-tel-frames="433" data-tel-fps="24" data-tel-t="0,3,6,9,12,18" aria-hidden="true"></canvas>
     <div class="sq-shade"></div>
     <ol class="sq-dots" aria-hidden="true">${STOPS.map(() => '<li></li>').join('')}</ol>
-    <p class="sq-hint" aria-hidden="true">Fais défiler</p>
-    <p class="sq-ia">Images générées par IA.</p>
+    <button class="sq-hint" type="button" aria-label="Voir l’offre suivante"><span>Faites défiler</span><svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true"><path d="M5 9l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <a class="btn sq-cta" href="#devis">Demander un devis</a>
   </div>
   <div class="sq-steps">
