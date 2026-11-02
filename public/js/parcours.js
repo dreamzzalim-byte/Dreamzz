@@ -1,5 +1,5 @@
-// Parcours Labs : le film avance en continu avec le scroll (séquence d'images dessinée sur un canvas),
-// les étiquettes de chaque offre défilent par-dessus.
+// Parcours Labs : le film avance avec le scroll (séquence d'images dessinée sur un canvas).
+// Les mots et les prix sont dans les images : à chaque arrêt, le film se pose, puis repart vers le suivant.
 (() => {
   const sec = document.querySelector('.sq');
   if (!sec) return;
@@ -13,7 +13,7 @@
   const T = steps.map((s) => parseFloat(s.dataset.t) || 0);
   const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const phone = matchMedia('(max-width: 760px)');
-  let kind = '', imgs = [], target = 0, shown = 0, drawn = -1, active = -1, A = [];
+  let kind = '', imgs = [], target = 0, shown = 0, drawn = -1, active = -1;
 
   // ---- images : arrêts d'abord, puis de plus en plus serré (1 sur 16, 8, 4, 2, 1)
   function order() {
@@ -55,30 +55,50 @@
   }
   function draw(k) {
     const im = imgs[k];
-    const cw = canvas.width, ch = canvas.height, s = Math.max(cw / im.naturalWidth, ch / im.naturalHeight);
-    const w = im.naturalWidth * s, h = im.naturalHeight * s;
-    ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+    const cw = canvas.width, ch = canvas.height, iw = im.naturalWidth, ih = im.naturalHeight;
+    const s = Math.max(cw / iw, ch / ih);
+    if (iw * s > cw * 1.06) {
+      // image plus large que l'écran : on la montre en entier sur la largeur (le mot ne doit pas être coupé),
+      // le haut et le bas sont remplis par la même image floutée et assombrie
+      ctx.fillStyle = '#05080F'; ctx.fillRect(0, 0, cw, ch);
+      if ('filter' in ctx) {
+        ctx.filter = 'blur(24px) brightness(.45)';
+        ctx.drawImage(im, (cw - iw * s) / 2, (ch - ih * s) / 2, iw * s, ih * s);
+        ctx.filter = 'none';
+      }
+      const f = cw / iw, h = ih * f;
+      ctx.drawImage(im, 0, (ch - h) / 2, cw, h);
+    } else {
+      const w = iw * s, h = ih * s;
+      ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+    }
   }
 
-  // ---- repères : le film passe sur l'arrêt quand les étiquettes de l'offre sont au milieu de l'écran
+  // ---- repères : chaque étape occupe une hauteur de scroll ; le film reste posé sur l'arrêt pendant
+  // la première partie (le mot en verre se lit), puis avance vers l'arrêt suivant
+  const HOLD = 0.6;
+  let O = [];
   function measure() {
     const top = sec.getBoundingClientRect().top + scrollY;
-    A = steps.map((s, k) => {
-      if (k === 0) return 0;
-      const r = (s.querySelector('.sq-say') || s).getBoundingClientRect();
-      return Math.max(0, r.top + scrollY - top + r.height / 2 - innerHeight / 2);
-    });
+    O = steps.map((st) => st.getBoundingClientRect().top + scrollY - top);
     size(); onScroll();
   }
   function onScroll() {
-    if (!A.length) return;
+    if (!O.length) return;
     const y = Math.max(0, -sec.getBoundingClientRect().top);
     let i = 0;
-    while (i < A.length - 1 && y >= A[i + 1]) i++;
-    const f = i < A.length - 1 ? Math.min(1, Math.max(0, (y - A[i]) / (A[i + 1] - A[i] || 1))) : 0;
-    const a = f > 0.5 && i < steps.length - 1 ? i + 1 : i;
-    target = calm ? Math.round(T[a] * FPS) : (i < T.length - 1 ? T[i] + (T[i + 1] - T[i]) * f : T[i]) * FPS;
-    if (a !== active) { active = a; dots.forEach((d, k) => d.classList.toggle('on', k === a)); }
+    while (i < O.length - 1 && y >= O[i + 1]) i++;
+    let t = T[i], a = i;
+    if (i < O.length - 1) {
+      const len = O[i + 1] - O[i], h = O[i] + len * HOLD;
+      if (y > h) {
+        const f = Math.min(1, (y - h) / (O[i + 1] - h || 1));
+        t = calm ? T[f < 0.5 ? i : i + 1] : T[i] + (T[i + 1] - T[i]) * f;
+        a = f < 0.5 ? i : i + 1;
+      }
+    }
+    target = t * FPS;
+    if (a !== active) { active = a; dots.forEach((el, k) => el.classList.toggle('on', k === a)); }
     if (hint && scrollY > 40) hint.classList.add('off');
   }
 

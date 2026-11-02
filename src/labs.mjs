@@ -18,12 +18,12 @@ const PACKS = [
 // Parcours « Du terrain à l'écran » : un film qui avance au scroll, une fiche par arrêt.
 // t = seconde du film où la caméra se pose ; side = côté libre de l'image (ordinateur) ; x = cadrage téléphone (0 à 100).
 const STOPS = [
-  { id: 'route', t: 0, side: 'l', v: 'c', x: 54 },
-  { id: 'barber', t: 2.208, side: 'l', v: 'c', x: 83 },
-  { id: 'atelier', t: 3.875, side: 'r', v: 'b', x: 15 },
-  { id: 'bistrot', t: 5.792, side: 'l', v: 't', x: 87 },
-  { id: 'chantier', t: 7.75, side: 'l', v: 't', x: 33 },
-  { id: 'aerien', t: 9.875, side: 'l', v: 'c', x: 50 },
+  { id: 'route', t: 0, side: 'l', v: 'c', x: 50 },
+  { id: 'barber', t: 2, side: 'l', v: 'c', x: 50 },
+  { id: 'atelier', t: 4, side: 'r', v: 'b', x: 50 },
+  { id: 'bistrot', t: 6, side: 'l', v: 't', x: 50 },
+  { id: 'chantier', t: 8, side: 'l', v: 't', x: 50 },
+  { id: 'qg', t: 10, side: 'l', v: 'c', x: 50 },
 ];
 const IDS = ['', 'design', 'interfaces', 'site', 'application', 'suivi'];
 const zz = '<i class="sq-zz" aria-hidden="true"><img src="img/labs/zz.webp" alt="" width="40" height="34"></i>';
@@ -130,11 +130,12 @@ export function labsPage(mode) {
     body: `
 <section class="sq" id="parcours" aria-label="Nos offres">
   <div class="sq-stage">
-    <canvas class="sq-film" data-src="img/labs/parcours/" data-frames="238" aria-hidden="true"></canvas>
+    <canvas class="sq-film" data-src="img/labs/parcours8/" data-frames="241" aria-hidden="true"></canvas>
     <div class="sq-shade"></div>
     <ol class="sq-dots" aria-hidden="true">${STOPS.map(() => '<li></li>').join('')}</ol>
     <p class="sq-hint" aria-hidden="true">Fais défiler</p>
     <p class="sq-ia">Images générées par IA.</p>
+    <a class="btn sq-cta" href="#devis">Demander un devis</a>
   </div>
   <div class="sq-steps">
     <div class="sq-step" ${at(0)}><div class="sq-say">
