@@ -1,6 +1,6 @@
 // Séquences 3D pré-calculées défilées au scroll, avec légendes reliées par un trait (une par section .seq).
 (() => {
-  const NS = 'http://www.w3.org/2000/svg', FOND = [233, 228, 220];
+  const NS = 'http://www.w3.org/2000/svg', FOND = [192, 189, 186];
   const sections = [...document.querySelectorAll('.seq')];
   const etats = sections.map((sec) => {
     const N = +sec.dataset.n, dir = sec.dataset.dir, LEG = JSON.parse(sec.querySelector('script[type="application/json"]').textContent);
@@ -27,8 +27,7 @@
   function taille(S) {
     S.R = Math.min(devicePixelRatio || 1, 2); S.W = S.cv.clientWidth; S.H = S.cv.clientHeight;
     S.cv.width = Math.round(S.W * S.R); S.cv.height = Math.round(S.H * S.R);
-    const iw = 9, ih = 16, large = S.W / S.H > 0.75;
-    const s = large ? Math.min(S.W / iw, S.H / ih) : Math.max(S.W / iw, S.H / ih);
+    const iw = 9, ih = 16, s = Math.min(S.W / iw, S.H / ih);   // image entière (fond uni = raccord invisible)
     S.box = { w: iw * s, h: ih * s }; S.box.x = (S.W - S.box.w) / 2; S.box.y = (S.H - S.box.h) / 2; S.last = -1;
   }
   const fondu = (f, de, a, m = 6) => Math.max(0, Math.min(1, de <= 0 ? 1 : (f - de) / m, (a - f) / m));
