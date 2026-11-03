@@ -5,7 +5,8 @@
   const etats = sections.map((sec) => {
     const N = +sec.dataset.n, dir = sec.dataset.dir, LEG = JSON.parse(sec.querySelector('script[type="application/json"]').textContent);
     const scene = sec.querySelector('.scene'), cv = sec.querySelector('canvas'), g = cv.getContext('2d'), svg = sec.querySelector('svg');
-    const imgs = new Array(N); const S = { sec, N, dir, LEG, scene, cv, g, svg, imgs, cur: 0, cible: 0, last: -1, P: null, box: {}, W: 0, H: 0, R: 1, charge: false };
+    const imgs = new Array(N), fond = sec.dataset.fond ? sec.dataset.fond.split(',').map(Number) : FOND; scene.style.background = `rgb(${fond})`;
+    const S = { sec, N, dir, LEG, scene, cv, g, svg, imgs, fond, cur: 0, cible: 0, last: -1, P: null, box: {}, W: 0, H: 0, R: 1, charge: false };
     fetch(dir + 'legendes.json').then((r) => r.json()).then((p) => { S.P = p; S.last = -1; });
     LEG.forEach((L) => {
       L.el = document.createElement('div'); L.el.className = 'leg'; L.el.innerHTML = `<b>${L.t}</b><span>${L.s}</span>`; scene.appendChild(L.el);
@@ -58,10 +59,10 @@
   function dessiner(S, f) {
     const a = Math.floor(f), b = Math.min(S.N - 1, a + 1), t = f - a, ia = proche(S, a);
     if (ia < 0) return;
-    S.g.fillStyle = `rgb(${FOND})`; S.g.fillRect(0, 0, S.cv.width, S.cv.height);
+    S.g.fillStyle = `rgb(${S.fond})`; S.g.fillRect(0, 0, S.cv.width, S.cv.height);
     peindre(S, S.imgs[ia], 1); if (t > 0.01 && ok(S, b) && b !== ia) peindre(S, S.imgs[b], t);
     if (S.box.x > 1) for (const [x0, x1] of [[S.box.x, S.box.x + S.box.w * 0.16], [S.box.x + S.box.w, S.box.x + S.box.w * 0.84]]) {
-      const gr = S.g.createLinearGradient(x0 * S.R, 0, x1 * S.R, 0); gr.addColorStop(0, `rgb(${FOND})`); gr.addColorStop(1, `rgba(${FOND},0)`);
+      const gr = S.g.createLinearGradient(x0 * S.R, 0, x1 * S.R, 0); gr.addColorStop(0, `rgb(${S.fond})`); gr.addColorStop(1, `rgba(${S.fond},0)`);
       S.g.fillStyle = gr; S.g.fillRect(Math.min(x0, x1) * S.R, 0, S.box.w * 0.16 * S.R, S.cv.height);
     }
     legendes(S, f);
