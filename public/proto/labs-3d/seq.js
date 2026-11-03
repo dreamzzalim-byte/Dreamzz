@@ -35,6 +35,7 @@
   function legendes(S, f) {
     if (!S.P) return;
     const a = Math.floor(f), b = Math.min(S.N - 1, a + 1), t = f - a, m = Math.max(16, S.W * 0.04);
+    let pileH = 0, pileB = 0;
     S.LEG.forEach((L) => {
       const A = S.P[a] && S.P[a][L.id], B = S.P[b] && S.P[b][L.id];
       if (!A || !B) { L.o = 0; } else {
@@ -45,7 +46,9 @@
       L.el.style.opacity = v ? L.o : 0; [L.halo, L.trait, L.pt].forEach((e) => e.setAttribute('opacity', v ? L.o : 0));
       if (!v) return;
       const gw = L.el.offsetWidth, gh = L.el.offsetHeight, haut = L.y > S.H * 0.55;
-      const lx = Math.max(m, Math.min(S.W - m - gw, L.x - gw / 2 + (L.dx || 0))), ly = haut ? S.H * 0.16 + (L.dy || 0) : S.H - gh - 96 + (L.dy || 0);
+      const lx = Math.max(m, Math.min(S.W - m - gw, L.x - gw / 2 + (L.dx || 0)));
+      const ly = haut ? S.H * 0.24 + pileH : S.H - gh - 96 - pileB;
+      if (haut) pileH += gh + 8; else pileB += gh + 8;
       L.el.style.left = lx + 'px'; L.el.style.top = ly + 'px';
       const bx = Math.max(lx + 14, Math.min(lx + gw - 14, L.x)), by = haut ? ly + gh : ly;
       const pts = `${bx},${by} ${bx},${(by + L.y) / 2} ${L.x},${L.y}`;
