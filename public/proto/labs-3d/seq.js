@@ -65,6 +65,10 @@
       const gr = S.g.createLinearGradient(x0 * S.R, 0, x1 * S.R, 0); gr.addColorStop(0, `rgb(${S.fond})`); gr.addColorStop(1, `rgba(${S.fond},0)`);
       S.g.fillStyle = gr; S.g.fillRect(Math.min(x0, x1) * S.R, 0, S.box.w * 0.16 * S.R, S.cv.height);
     }
+    if (S.box.y > 1) for (const [y0, y1] of [[S.box.y, S.box.y + S.box.h * 0.08], [S.box.y + S.box.h, S.box.y + S.box.h * 0.92]]) {
+      const gr = S.g.createLinearGradient(0, y0 * S.R, 0, y1 * S.R); gr.addColorStop(0, `rgb(${S.fond})`); gr.addColorStop(1, `rgba(${S.fond},0)`);
+      S.g.fillStyle = gr; S.g.fillRect(0, Math.min(y0, y1) * S.R, S.cv.width, S.box.h * 0.08 * S.R);
+    }
     legendes(S, f);
   }
   function scroll() {
