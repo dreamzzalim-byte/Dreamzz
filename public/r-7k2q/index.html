@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antisèche PECAT</title>
+<style>
+:root{--bg:#F2F1EC;--card:#FBFAF6;--ink:#121A31;--muted:#4A5168;--line:#E2E1DB;--accent:#3B4BF5;--warn:#B4231F}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1124;--card:#141B33;--ink:#F4F3EE;--muted:#B8BDD0;--line:#26304F;--accent:#8F98FF;--warn:#FF7A72}}
+:root[data-theme="dark"]{--bg:#0B1124;--card:#141B33;--ink:#F4F3EE;--muted:#B8BDD0;--line:#26304F;--accent:#8F98FF;--warn:#FF7A72}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;padding:20px 16px 40px}
+main{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:820px){main{grid-template-columns:1fr}}
+h1{max-width:1100px;margin:0 auto 14px;font-size:24px}
+h1 span{color:var(--accent)}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+h2{margin:0 0 10px;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+ol,ul{margin:0;padding-left:20px}
+li{margin:5px 0}
+q,.say{font-weight:600}
+.say{display:block;border-left:3px solid var(--accent);padding:4px 0 4px 10px;margin:6px 0}
+dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:6px 12px}
+dt{font-weight:700}
+dd{margin:0;color:var(--muted)}
+.no li{color:var(--warn);font-weight:600}
+.full{grid-column:1/-1}
+small{color:var(--muted)}
+</style>
+</head>
+<body>
+<h1>Réunion PECAT · <span>14 h</span></h1>
+<main>
+<section>
+<h2>Déroulé</h2>
+<ol>
+<li><span class="say">« Bonjour à tous, Abbel, chargé de consignation. J'ai conçu Perche de A à Z et je l'ai testée sur trois vraies nuits. Avant de vous la montrer : où en est PECAT aujourd'hui ? »</span></li>
+<li><b>J'écoute</b>, je note leurs mots.</li>
+<li><b>Film</b> 1 min 20 (onglet Chrome + son).</li>
+<li><b>Diapos</b> : constat → 5 états → garanties → essais → compte rendu.</li>
+<li><b>Démo 3 min</b>, fenêtre Perche seule, nuit Démo test : pose autorisée → posée → CV refusée → compte rendu.</li>
+<li><span class="say">« Je veux être dans l'équipe dès la création. Comment vous voyez mon rôle ? Qui décide, et quand ? »</span></li>
+<li><span class="say">« Rémi, je peux vous prendre 15 minutes la semaine prochaine ? »</span></li>
+</ol>
+</section>
+
+<section>
+<h2>Chiffres</h2>
+<ul>
+<li><b>22/22</b> perches posées et déposées</li>
+<li><b>38</b> dépêches confirmées</li>
+<li><b>0</b> erreur de numéro</li>
+<li>3 nuits · 3 percheurs · en parallèle de la procédure officielle</li>
+</ul>
+<h2 style="margin-top:16px">Répliques</h2>
+<ul>
+<li>Le code ? <q>Je vous montre le résultat, le reste on le cadre ensemble.</q></li>
+<li>Formation ? <q>Autodidacte. Conçue de A à Z, codée avec un assistant IA, testée en vrai.</q></li>
+<li>« C'est l'IA qui a tout fait » ? <q>L'IA, c'est l'outil. Les 5 états, l'ordre de pose, le jeton à la dépose : c'est moi.</q></li>
+<li>Jetons numériques ? <q>Le jeton réel prouve qu'on est devant la bonne perche.</q></li>
+<li>Données perso ? <q>L'appli trace les perches, pas les gens.</q></li>
+<li>Cas qui bloque ? <q>Moi, je l'ai réglé.</q></li>
+</ul>
+</section>
+
+<section class="full">
+<h2>Vocabulaire technique</h2>
+<dl>
+<dt>PWA</dt><dd>Appli web installable sans store, marche hors ligne · JavaScript, HTML, CSS</dd>
+<dt>Firebase / Firestore</dt><dd>Base Google qui synchronise les téléphones en direct · région Paris</dd>
+<dt>Hors ligne</dt><dd>Action mise en attente, part seule au retour du réseau, heure du serveur</dd>
+<dt>Règles de sécurité</dt><dd>Le serveur refuse si mauvais rôle ou mauvais chantier, pas seulement l'écran</dd>
+<dt>Cloudflare Workers</dt><dd>Mon serveur : sert l'appli et envoie les notifications</dd>
+<dt>Web Push / VAPID</dt><dd>Notifications standard, sans service tiers</dd>
+<dt>D1</dt><dd>Petite base Cloudflare : abonnements, scellés</dd>
+<dt>Leaflet + IGN</dt><dd>Affichage de la carte, gratuit</dd>
+<dt>PK open data SNCF Réseau</dt><dd>Perche placée par règle de trois entre deux bornes PK</dd>
+<dt>pdf.js</dt><dd>Lit le plan de perchage PDF, signale une anomalie, ne crée jamais le plan</dd>
+<dt>jsPDF</dt><dd>Compte rendu signé, scellé, vérifiable par QR code</dd>
+<dt>Playwright</dt><dd>Tests automatiques : plusieurs téléphones simulés sur une nuit complète</dd>
+<dt>GitHub / branche</dt><dd>Dépôt privé · une modif = une branche · retour arrière en minutes</dd>
+</dl>
+</section>
+
+<section>
+<h2>Image à donner</h2>
+<ul>
+<li>Calme, sûr : l'appli a déjà tourné en vrai</li>
+<li>Le terrain : je sais ce que les équipes acceptent</li>
+<li>Partenaire, pas concurrent de PECAT</li>
+<li>J'écoute plus que je ne parle</li>
+</ul>
+</section>
+
+<section>
+<h2>Ne pas dire</h2>
+<ul class="no">
+<li>Argent, classification, véhicule</li>
+<li>Code, accès, règles détaillées, fichiers</li>
+<li>« Idée venue du terrain » / « en tant que chargé de consignation »</li>
+<li>Critiquer PECAT · coder en live</li>
+</ul>
+</section>
+</main>
+</body>
+</html>
