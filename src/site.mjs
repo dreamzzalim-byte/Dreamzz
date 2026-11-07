@@ -220,7 +220,7 @@ ${body}
   </div>
 </footer>
 <script src="js/site.js" defer></script>
-${slug === 'labs' ? '<script src="js/parcours.js" defer></script>\n' : ''}</body>
+${slug === 'labs' ? '<script src="js/parcours.js" defer></script>\n' : ''}${slug === 'distributeurs' ? '<script src="js/borne-3d.js" defer></script>\n' : ''}</body>
 </html>
 `);
 }

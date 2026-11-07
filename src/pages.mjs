@@ -150,6 +150,16 @@ export function pages(mode) {
   </div>
 </section>
 
+<section class="tour3d" aria-label="La borne Dreamzz sur une façade de boutique">
+  <div class="t3-scene">
+    <canvas aria-hidden="true"></canvas>
+    <svg class="t3-traits" aria-hidden="true"></svg>
+    <div class="t3-titre h" data-de="0" data-a="14"><p>Distributeur automatique</p><h2>La borne<br>Dreamzz</h2></div>
+    <div class="t3-titre b" data-de="178" data-a="199"><p>Distributeur Dreamzz</p><h2>Votre boutique,<br>ouverte 24 h/24</h2><a class="btn" href="${L('devis')}">Demander un devis</a></div>
+    <button class="t3-indice" type="button" aria-label="Voir la suite"><span>Faites défiler</span><i></i></button>
+  </div>
+</section>
+
 <section class="light sec" id="fonctionnement">
   <div class="wrap">
     <div class="head"><div><p class="kicker">Comment ça marche</p><h2>Quatre écrans, trente secondes</h2></div></div>
