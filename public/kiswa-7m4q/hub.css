@@ -119,3 +119,21 @@ body.lb-open { overflow: hidden; }
 /* ---------- pied */
 .foot { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 44px var(--pad) 56px; border-top: 1px solid rgba(255,255,255,.1); }
 .foot p { margin: 0; font: 500 11px/1 var(--titres); letter-spacing: .28em; text-transform: uppercase; color: var(--gris-c); }
+
+/* ---------- K animé à l'ouverture (même déroulé que l'expérience 3D) */
+.hero-logo { overflow: visible; filter: drop-shadow(0 1px 6px rgba(0,0,0,.35)); }
+.lk-fut { transform-box: fill-box; transform-origin: 50% 100%; animation: lk-up .85s cubic-bezier(.22,.8,.24,1) .2s both; }
+.lk-bras { animation: lk-flow 1.2s cubic-bezier(.45,.05,.2,1) .9s both; }
+.lk-ligne { stroke-dasharray: 1 1; animation: lk-draw .9s cubic-bezier(.5,0,.25,1) 1.95s both; }
+.lk-iswa { animation: lk-word .8s cubic-bezier(.2,.7,.2,1) 2.5s both; }
+.lk-base { animation: lk-fade .8s ease 2.85s both; }
+.hero-bg { animation: lk-fade 1.2s ease both; }
+.hero-nav { animation: lk-fade .7s ease 3.1s both; }
+@keyframes lk-up { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes lk-flow { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes lk-draw { 0% { stroke-dashoffset: 1; } 99% { stroke-dashoffset: 0; stroke-dasharray: 1 1; } 100% { stroke-dashoffset: 0; stroke-dasharray: none; } }
+@keyframes lk-word { from { opacity: 0; transform: translateX(-2px); } to { opacity: 1; transform: none; } }
+@keyframes lk-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .lk-fut, .lk-bras, .lk-ligne, .lk-iswa, .lk-base, .hero-bg, .hero-nav { animation: none; }
+}
