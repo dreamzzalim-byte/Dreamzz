@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0C0C0D">
+<title>KISWA — Présentation</title>
+<link rel="icon" href="logo/k_noir_or.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/jost-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="hub.css">
+</head>
+<body>
+
+<header class="hero">
+  <img class="hero-bg" src="photos/couverture.webp" srcset="photos/couverture_s.webp 900w, photos/couverture.webp 2400w" sizes="100vw" alt="" fetchpriority="high">
+  <div class="hero-in">
+    <h1><img class="hero-logo" src="logo/logo_blanc.svg" alt="KISWA, résine, sols, design" width="480" height="168"></h1>
+  </div>
+  <nav class="hero-nav" aria-label="Sommaire">
+    <a href="#logo"><b>01</b>Logo</a>
+    <a href="#experience"><b>02</b>Expérience 3D</a>
+    <a href="#catalogue"><b>03</b>Catalogue</a>
+    <a href="#visuels"><b>04</b>Visuels</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="sec sec-beton" id="logo">
+    <div class="wrap">
+      <p class="num">01</p>
+      <h2>Le logo</h2>
+      <p class="lead">Béton brut, résine coulée, une ligne d’or.</p>
+
+      <div class="logo-main">
+        <img src="logo/k_noir_or.svg" alt="Signe K de KISWA, noir et or" class="k-big">
+        <img src="logo/logo_noir.svg" alt="Logo KISWA, résine, sols, design" class="lockup-big">
+      </div>
+
+      <ul class="tiles">
+        <li class="tile t-noir"><img src="logo/logo_blanc.svg" alt=""><span>Sur fond noir</span></li>
+        <li class="tile t-blanc"><img src="logo/logo_noir.svg" alt=""><span>Sur fond clair</span></li>
+        <li class="tile t-noir t-k"><img src="logo/k_blanc_or.svg" alt=""><span>Signe</span></li>
+        <li class="tile t-noir t-k"><img src="logo/k_or.svg" alt=""><span>Signe or</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec sec-noir" id="experience">
+    <div class="wrap">
+      <p class="num">02</p>
+      <h2>L’expérience 3D</h2>
+      <p class="lead">3 finitions · sol en coupe</p>
+      <a class="poster" href="3d/">
+        <img src="photos/experience_3d.webp" alt="Aperçu de l’expérience 3D KISWA" loading="lazy" width="1600" height="900">
+        <span class="btn">Ouvrir l’expérience 3D</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="sec sec-beton" id="catalogue">
+    <div class="wrap">
+      <p class="num">03</p>
+      <h2>Le catalogue</h2>
+      <p class="lead">20 pages · A4 paysage</p>
+
+      <div class="viewer" data-pages="20">
+        <div class="stage">
+          <button class="page-btn" type="button" aria-label="Voir la page en grand"><img class="page" src="catalogue/p01.webp" alt="Catalogue KISWA, page 1" width="1871" height="1323"></button>
+          <button class="nav prev" type="button" aria-label="Page précédente">‹</button>
+          <button class="nav next" type="button" aria-label="Page suivante">›</button>
+        </div>
+        <div class="bar">
+          <span class="count"><b>01</b> / 20</span>
+          <a class="btn btn-dark" href="dl/KISWA_catalogue.pdf" download>Télécharger le PDF</a>
+        </div>
+        <ol class="thumbs"></ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-noir" id="visuels">
+    <div class="wrap">
+      <p class="num">04</p>
+      <h2>Les visuels</h2>
+      <ul class="gallery">
+        <li><button type="button" data-full="photos/metallisee.webp"><img src="photos/metallisee_s.webp" alt="Résine métallisée cuivre coulée sur béton brut" loading="lazy" width="900" height="604"></button><span>Métallisée cuivre</span></li>
+        <li><button type="button" data-full="photos/flakes.webp"><img src="photos/flakes_s.webp" alt="Sol flakes gris, blanc et noir à côté du béton brut" loading="lazy" width="900" height="600"></button><span>Flakes</span></li>
+        <li><button type="button" data-full="photos/contact.webp"><img src="photos/contact_s.webp" alt="Résine noire à veines cuivre coulée sur béton brut" loading="lazy" width="900" height="604"></button><span>Métallisée noire, veines cuivre</span></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <img src="logo/k_blanc_or.svg" alt="" width="28" height="27">
+  <p>Dreamzz Labs</p>
+</footer>
+
+<dialog class="lightbox" aria-label="Image en grand">
+  <img alt="">
+  <button type="button" class="lb-prev" aria-label="Précédente">‹</button>
+  <button type="button" class="lb-next" aria-label="Suivante">›</button>
+  <button type="button" class="close" aria-label="Fermer">×</button>
+</dialog>
+
+<script src="hub.js" defer></script>
+</body>
+</html>
