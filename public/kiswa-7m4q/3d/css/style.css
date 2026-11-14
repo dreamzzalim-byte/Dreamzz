@@ -462,3 +462,12 @@ a { color: inherit; }
   .tab::after { transition: none; }
   .bar button::after { transition: none; }
 }
+
+/* écran de chargement : visible pendant la préparation de la 3D */
+.loader { position: fixed; inset: 0; z-index: 50; display: grid; place-content: center; justify-items: center; gap: 26px; background: #101011; transition: opacity .7s ease; }
+.loader img { width: 56px; height: auto; animation: ld-breath 1.8s ease-in-out infinite; }
+.loader span { display: block; width: 120px; height: 1px; background: rgba(255,255,255,.14); overflow: hidden; }
+.loader i { display: block; height: 100%; background: #C8A769; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.loader.done { opacity: 0; pointer-events: none; }
+@keyframes ld-breath { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .loader img { animation: none; } }

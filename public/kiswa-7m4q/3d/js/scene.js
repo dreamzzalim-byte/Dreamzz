@@ -27,8 +27,10 @@ const FAR = 34;
 const YAW = 35 * DEG;
 
 export function createScene({ canvas, reduced = false, colors, mark = KMARK }) {
+  // téléphone / tablette : moins de pixels à calculer (la résine reste nette, le rendu devient fluide)
+  const mobile = window.matchMedia('(pointer: coarse)').matches || Math.min(screen.width, screen.height) < 820;
   const renderer = new WebGLRenderer({
-    canvas, antialias: (window.devicePixelRatio || 1) < 2, alpha: false, stencil: false,
+    canvas, antialias: !mobile && (window.devicePixelRatio || 1) < 2, alpha: false, stencil: false,
     powerPreference: 'high-performance'
   });
   if (!renderer.capabilities.isWebGL2) throw new Error('WebGL2 indisponible');
@@ -36,7 +38,7 @@ export function createScene({ canvas, reduced = false, colors, mark = KMARK }) {
   renderer.setClearColor(fogHex, 1);
   renderer.autoClear = true;
 
-  let dprCap = Math.min(window.devicePixelRatio || 1, 2);
+  let dprCap = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 2);
   let dprLocked = false;
   let W = 1, H = 1, aspect = 1;
 
@@ -86,8 +88,8 @@ export function createScene({ canvas, reduced = false, colors, mark = KMARK }) {
   ];
 
   // --- Textures cuites au démarrage ----------------------------------------------
-  const TEX = 1024;
-  const maxAniso = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+  const TEX = mobile ? 512 : 1024;
+  const maxAniso = Math.min(mobile ? 4 : 8, renderer.capabilities.getMaxAnisotropy());
   const makeRT = () => {
     const rt = new WebGLRenderTarget(TEX, TEX, { depthBuffer: false });
     const t = rt.texture;
@@ -296,7 +298,7 @@ export function createScene({ canvas, reduced = false, colors, mark = KMARK }) {
   if (mark) {
     K.state = 'calc';
     setTimeout(() => {
-      markFields(mark).then(buildMark).catch(() => { K.state = 'off'; K.mesh = null; });   // sans le signe, la page reste complète
+      markFields(mark, mobile ? { n: 448 } : undefined).then(buildMark).catch(() => { K.state = 'off'; K.mesh = null; });   // sans le signe, la page reste complète
     }, 60);
   }
 
@@ -517,7 +519,27 @@ export function createScene({ canvas, reduced = false, colors, mark = KMARK }) {
 
   resize();
 
+  // compile les shaders un par un (une image entre chaque) pour que l'ouverture ne fige pas l'écran
+  function warm(onStep) {
+    const list = [];
+    scene.traverse((o) => { if (o.isMesh) list.push(o); });
+    let i = 0;
+    return new Promise((done) => {
+      const step = () => {
+        if (i >= list.length) { onStep && onStep(1); done(); return; }
+        const o = list[i++], vis = o.visible;
+        o.visible = true;
+        try { renderer.compile(o, camera, scene); } catch (e) { /* compilé au premier rendu */ }
+        o.visible = vis;
+        onStep && onStep(i / list.length);
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
   return {
+    warm,
     frame, resize, setTargetFinish, settle, watchPerf, anchors,
     get explode() { return explode; },
     get busy() { return pour.on || intro < 1 || K.state === 'calc' || (K.state === 'ready' && K.t < K.end); },

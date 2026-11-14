@@ -338,6 +338,8 @@ async function init() {
       const mod = await import('./scene.js');
       document.documentElement.classList.add('gl');
       const scene = mod.createScene({ canvas, reduced, colors: COULEURS });
+      const bar = document.querySelector('.loader i');
+      await scene.warm((p) => { if (bar) bar.style.transform = `scaleX(${p.toFixed(3)})`; });
       start3d(scene);
       ok = true;
     }
@@ -345,6 +347,11 @@ async function init() {
     ok = false;
   }
   if (!ok) document.documentElement.classList.remove('gl');   // repli : page statique en CSS
+  const loader = document.querySelector('.loader');
+  if (loader) {
+    requestAnimationFrame(() => requestAnimationFrame(() => loader.classList.add('done')));
+    setTimeout(() => loader.remove(), 900);
+  }
 }
 
 init();
