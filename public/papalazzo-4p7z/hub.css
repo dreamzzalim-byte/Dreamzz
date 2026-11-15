@@ -170,3 +170,5 @@ h2 .acc { font-family: "Instrument Serif", Georgia, serif; font-style: italic; f
 .gallery img { aspect-ratio: 1 / 1; object-fit: cover; border-radius: 4px; }
 .gallery span { margin-top: 8px; font-size: 12px; font-weight: 640; font-stretch: 75%; letter-spacing: .02em; font-size: 15px; color: #F6F0E3; }
 .note { margin: 28px 0 0; font-size: 13px; color: var(--gris-c); }
+.hero-nav { animation: lk-fade .7s ease .5s both; }
+@media (prefers-reduced-motion: reduce) { .hero-nav { animation: none; } }
