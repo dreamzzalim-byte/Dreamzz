@@ -139,7 +139,7 @@ body.lb-open { overflow: hidden; }
 }
 
 /* ---------- film */
-.sec-film { padding-bottom: clamp(32px, 6vw, 60px); }
+.sec-film { border-top: 1px solid rgba(255,255,255,.1); }
 .film { margin: clamp(36px, 6vw, 64px) auto 24px; width: min(100%, 420px, calc((100svh - 140px) * 0.5625)); }
 .film video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; background: #000; }
 .sec-film .btn { display: table; margin: 0 auto; }
