@@ -174,3 +174,5 @@ h2 .acc { font-family: "Instrument Serif", Georgia, serif; font-style: italic; f
 @media (prefers-reduced-motion: reduce) { .hero-nav { animation: none; } }
 .hero-nav a { flex-basis: 33.33%; }
 @media (max-width: 720px) { .hero-nav a { flex-basis: 100%; border-right: 0; } }
+
+.clip{display:block;width:min(100%,360px);height:auto;aspect-ratio:9/16;margin:28px auto 0;border-radius:22px;background:#1D2124;box-shadow:0 24px 60px rgba(0,0,0,.25)}
