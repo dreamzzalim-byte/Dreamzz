@@ -172,3 +172,5 @@ h2 .acc { font-family: "Instrument Serif", Georgia, serif; font-style: italic; f
 .note { margin: 28px 0 0; font-size: 13px; color: var(--gris-c); }
 .hero-nav { animation: lk-fade .7s ease .5s both; }
 @media (prefers-reduced-motion: reduce) { .hero-nav { animation: none; } }
+.hero-nav a { flex-basis: 33.33%; }
+@media (max-width: 720px) { .hero-nav a { flex-basis: 100%; border-right: 0; } }
