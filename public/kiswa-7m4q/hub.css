@@ -21,7 +21,7 @@ a { color: inherit; }
 .hero-in { align-self: center; justify-self: end; padding: 0 var(--pad); }
 .hero-logo { width: min(480px, 78vw); height: auto; }
 .hero-nav { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid rgba(255,255,255,.14); }
-.hero-nav a { flex: 1 1 25%; min-width: 140px; padding: 18px var(--pad) 22px; text-decoration: none; font: 500 12px/1 var(--titres); letter-spacing: .24em; text-transform: uppercase; color: #fff; border-right: 1px solid rgba(255,255,255,.14); transition: background .2s; }
+.hero-nav a { flex: 1 1 20%; min-width: 130px; padding: 18px var(--pad) 22px; text-decoration: none; font: 500 12px/1 var(--titres); letter-spacing: .24em; text-transform: uppercase; color: #fff; border-right: 1px solid rgba(255,255,255,.14); transition: background .2s; }
 .hero-nav a:last-child { border-right: 0; }
 .hero-nav a:focus-visible { outline: 2px solid var(--or); outline-offset: -2px; }
 @media (hover: hover) { .hero-nav a:hover { background: rgba(200,167,105,.12); } }
@@ -137,3 +137,10 @@ body.lb-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .lk-fut, .lk-bras, .lk-ligne, .lk-iswa, .lk-base, .hero-bg, .hero-nav { animation: none; }
 }
+
+/* ---------- film */
+.sec-film { padding-bottom: clamp(32px, 6vw, 60px); }
+.film { margin: clamp(36px, 6vw, 64px) auto 24px; width: min(100%, 420px, calc((100svh - 140px) * 0.5625)); }
+.film video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; background: #000; }
+.sec-film .btn { display: table; margin: 0 auto; }
+@media (max-width: 720px) { .hero-nav a { flex-basis: 33.33%; } .hero-nav a:nth-child(2n) { border-right: 1px solid rgba(255,255,255,.14); } .hero-nav a:nth-child(3n) { border-right: 0; } }
