@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PapaLazzo — pizzeria au Passage d’Agen</title>
+<link rel="icon" href="../logo/icone.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+:root{--an:#1D2124;--pa:#F6F0E3;--pa2:#EDE4D1;--bo:#D9C4A0;--sa:#5F6E50;--sc:#B5B99E;--te:#8C4A36;--t2:#5A5F58;--tr:#CFC3AA;--vert:#15803D}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#0E1012;scroll-behavior:smooth}
+body{font-family:'Instrument Sans',system-ui,sans-serif;color:var(--an);-webkit-font-smoothing:antialiased}
+.app{position:relative;max-width:430px;margin:0 auto;background:var(--pa);min-height:100vh}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid #E9A23B;outline-offset:2px}
+.lab{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.t{font-weight:640;font-stretch:75%;text-transform:uppercase;line-height:.95;letter-spacing:-.005em}
+.acc{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-stretch:100%;text-transform:none;letter-spacing:0}
+.ic{width:18px;height:18px;flex:none}
+/* accueil */
+.seq{position:relative;background:var(--an)}
+.hero{position:relative;height:100vh;min-height:560px;max-height:900px;background:var(--an);color:var(--pa);overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% center;animation:allume 1.7s .25s both}
+@keyframes allume{0%{filter:brightness(.16)}10%{filter:brightness(.85)}14%{filter:brightness(.25)}24%{filter:brightness(1)}29%{filter:brightness(.45)}40%,100%{filter:brightness(1)}}
+.hero .voile{position:absolute;inset:0;background:linear-gradient(180deg,rgba(29,33,36,.6) 0%,rgba(29,33,36,0) 20%,rgba(29,33,36,0) 34%,rgba(29,33,36,.9) 74%,#1D2124 100%)}
+.hero .haut{position:absolute;left:20px;right:20px;top:20px;display:flex;justify-content:space-between;align-items:center}
+.hero .haut img{height:34px}
+.etat{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:600;color:#fff;background:var(--vert);box-shadow:0 6px 20px rgba(21,128,61,.45)}
+.etat i{display:block;width:8px;height:8px;border-radius:50%;background:#86EFAC;animation:pulse 1.8s ease-out infinite}
+.etat.ferme{background:#3A3F44;box-shadow:none}.etat.ferme i{background:#B9B4A6;animation:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(134,239,172,.75)}70%{box-shadow:0 0 0 9px rgba(134,239,172,0)}100%{box-shadow:0 0 0 0 rgba(134,239,172,0)}}
+.hero .bas{position:absolute;left:20px;right:20px;bottom:112px;display:flex;flex-direction:column;gap:14px}
+.hero .lab{color:var(--sc)}
+.hero h1{font-size:58px}.hero h1 .acc{color:var(--bo)}
+.hero h1 span.m{display:inline-block;opacity:0;transform:translateY(18px);animation:monte .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes monte{to{opacity:1;transform:none}}
+.infos{display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid rgba(246,240,227,.25);font-size:15px}
+.infos a{display:flex;align-items:center;gap:8px;min-height:30px;text-decoration:none}
+.infos .ic{color:var(--bo)}
+/* barre */
+.barre{position:sticky;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px 16px 16px;background:var(--pa);border-top:1px solid var(--tr)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:3px;border:1.5px solid var(--an);background:transparent;text-decoration:none;font-size:17px;font-weight:640;font-stretch:75%;text-transform:uppercase;letter-spacing:.01em;transition:transform .15s ease}
+.btn:active{transform:scale(.97)}
+.btn.p{background:var(--te);border-color:var(--te);color:var(--pa)}
+.btn svg{width:15px;height:21px;color:var(--te)}
+.barre .btn{font-size:15px;gap:6px}
+/* bardage */
+.porte{position:relative;height:190vh}
+.porte .fixe{position:sticky;top:0;height:100vh;overflow:hidden;background:radial-gradient(120% 60% at 50% 100%,rgba(217,196,160,.16),rgba(29,33,36,0) 70%),var(--an);color:var(--pa);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:14px;text-align:center;padding:16vh 24px 0}
+.porte .fixe img.pz2{position:absolute;left:50%;bottom:-150px;width:440px;height:440px;margin-left:-220px;filter:drop-shadow(0 -6px 40px rgba(0,0,0,.6));will-change:transform}
+.porte .fixe .lab{color:var(--sc)}
+.porte .fixe h2{font-size:64px}.porte .fixe h2 .acc{color:var(--bo)}
+.porte .fixe p.s{font-size:15px;color:#C9C3B4}
+.vantail{position:absolute;top:0;bottom:0;width:50%;overflow:hidden;will-change:transform;box-shadow:0 0 40px rgba(0,0,0,.5)}
+.vantail.g{left:0}.vantail.d{right:0}
+.vantail .bois{position:absolute;top:0;bottom:0;width:200%;background:
+ linear-gradient(180deg,rgba(29,33,36,.55) 0%,rgba(29,33,36,0) 30%,rgba(255,214,150,.10) 60%,rgba(29,33,36,.35) 100%),
+ repeating-linear-gradient(90deg,#CDB48A 0 2px,#D9C4A0 2px 22px,#D2BB94 22px 40px,#C4A97D 40px 41px,#1D2124 41px 43px)}
+.vantail.g .bois{left:0}.vantail.d .bois{right:0}
+.vantail svg{position:absolute;top:50%;left:50%;width:230px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 14px rgba(255,205,140,.55))}
+.vantail .indice{position:absolute;left:0;right:0;bottom:96px;text-align:center;color:var(--an);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+/* carte */
+.sec{padding:28px 20px 8px}
+.sec .lab{color:var(--te)}
+#carte{background:var(--an);color:var(--pa)}
+.scene{position:sticky;top:0;z-index:5;height:292px;overflow:hidden;background:radial-gradient(70% 90% at 100% 42%,rgba(217,196,160,.17),rgba(29,33,36,0) 70%),linear-gradient(180deg,#1D2124 94%,rgba(29,33,36,0))}
+.scene .pz{position:absolute;width:300px;height:300px;right:-126px;top:-15px;transition:width .5s cubic-bezier(.3,1.35,.5,1),height .5s cubic-bezier(.3,1.35,.5,1),right .5s cubic-bezier(.3,1.35,.5,1),top .5s cubic-bezier(.3,1.35,.5,1);filter:drop-shadow(0 18px 28px rgba(0,0,0,.6));will-change:transform}
+.scene .pz img{position:absolute;inset:0;width:100%;height:100%}
+.scene .pz img.g{transition:opacity .45s ease,transform .6s cubic-bezier(.2,1.3,.4,1)}
+.scene .pz img.g.hors{opacity:0;transform:scale(1.14);transition:opacity .16s ease,transform .16s ease}
+.scene .mention{position:absolute;left:20px;bottom:30px;font-size:10px;color:#8E8A7E}
+.choix{position:absolute;left:20px;top:26px;width:216px;display:flex;flex-direction:column;gap:6px;text-shadow:0 1px 12px rgba(29,33,36,.9)}
+.choix .lab{color:var(--sc);display:flex;align-items:center;gap:6px}
+.choix h3{font-size:38px}
+.choix p.i{font-family:'Instrument Serif',serif;font-style:italic;font-size:16px;line-height:1.2;color:#D6CFBF;max-width:170px}
+.choix .px{font-size:42px;color:var(--bo);white-space:nowrap;font-variant-numeric:tabular-nums;margin-top:6px}
+.tailles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:4px 20px 0}
+.tailles button{height:46px;border-radius:3px;border:1.5px solid var(--pa);background:transparent;font-size:14px;font-weight:640;font-stretch:75%;text-transform:uppercase;transition:background .2s,color .2s}
+.tailles button[aria-pressed=true]{background:var(--pa);color:var(--an)}
+.filtres{display:flex;gap:6px;padding:12px 20px 0;overflow-x:auto}
+.filtres button{display:flex;align-items:center;gap:6px;height:44px;padding:0 13px;border-radius:999px;border:1px solid #8E8A7E;background:transparent;font-size:13px;font-weight:600;white-space:nowrap;transition:background .2s,color .2s}
+.filtres button[aria-pressed=true]{background:var(--te);border-color:var(--te);color:var(--pa)}
+.liste{list-style:none;padding:8px 20px 24px}
+.liste li{overflow:hidden;max-height:60px;opacity:1;transition:max-height .35s ease,opacity .25s ease}
+.liste li.cache{max-height:0;opacity:0}
+.liste button{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;height:52px;padding:0;border:0;border-bottom:1px solid rgba(246,240,227,.18);background:transparent;text-align:left}
+.liste .n{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:640;font-stretch:75%;text-transform:uppercase;transition:color .2s}
+.liste .n svg{width:17px;height:17px}
+.liste .pp{font-size:17px;font-weight:640;font-stretch:75%;color:var(--bo);font-variant-numeric:tabular-nums}
+.liste li.sel .n{color:var(--bo)}
+/* avis */
+.avis-tete{display:flex;flex-direction:column;gap:10px;padding:28px 20px 24px;background:var(--an);color:var(--pa)}
+.avis-tete .lab{color:var(--sc)}
+.avis-tete .l{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.note{font-size:128px;line-height:.82;font-variant-numeric:tabular-nums}
+.etoiles{display:flex;gap:4px}
+.etoiles svg{width:22px;height:22px;fill:#4A5055;transition:fill .35s ease,transform .35s cubic-bezier(.3,1.6,.5,1)}
+.etoiles svg.on{fill:var(--bo);transform:scale(1.12)}
+.barres{display:flex;flex-direction:column;gap:6px;padding:20px 20px 0}
+.barres .lab,.themes .lab{color:var(--t2);margin-bottom:4px}
+.barres .r{display:grid;grid-template-columns:16px 1fr 28px;align-items:center;gap:10px;font-size:13px;font-weight:600}
+.barres .r span:nth-child(2){display:block;height:8px;border-radius:4px;background:#E4DAC4;overflow:hidden}
+.barres .r i{display:block;height:8px;width:0;border-radius:4px;background:var(--te);transition:width 1s cubic-bezier(.2,.7,.2,1)}
+.barres .r span:last-child{text-align:right;color:var(--t2)}
+.themes{padding:22px 20px 0}
+.themes div{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.themes button{height:44px;padding:0 14px;border-radius:999px;border:1px solid #8A8474;background:transparent;font-size:14px;font-weight:600;transition:background .2s,color .2s}
+.themes button[aria-pressed=true]{background:var(--an);border-color:var(--an);color:var(--pa)}
+.extrait{margin:16px 20px 0;padding:16px 0;border-top:1px solid var(--an);border-bottom:1px solid var(--tr)}
+.extrait p:first-child{font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;line-height:1.2;transition:opacity .25s}
+.extrait p+p{font-size:13px;color:var(--t2);margin-top:10px}
+.deux{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:18px 20px 8px}
+.src{padding:4px 20px 28px;font-size:12px;color:var(--t2)}
+/* acces */
+.acces-img{position:relative;height:190px;overflow:hidden}
+.acces-img img{width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block}
+.acces-img::after{content:'';position:absolute;inset:0;background:rgba(29,33,36,.35)}
+.acces-img svg{position:absolute;z-index:1;left:50%;top:46px;width:64px;height:90px;margin-left:-32px;animation:rebond 2.4s ease-in-out infinite}
+@keyframes rebond{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.acces h2{font-size:44px;margin-top:12px}.acces h2 .acc{color:var(--te)}
+.lignes{display:flex;flex-direction:column;gap:6px;margin-top:12px;font-size:15px;line-height:1.35}
+.lignes p{display:flex;gap:8px}.lignes svg{color:var(--te);margin-top:1px}
+.sem-t{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.sem-t .lab{color:var(--t2)}
+.sem-t .etat{padding:6px 12px;box-shadow:none;white-space:nowrap}
+.sem{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:8px}
+.sem div{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;border-radius:3px;background:var(--pa2)}
+.sem div b{font-size:15px;font-weight:640;font-stretch:75%;text-transform:uppercase}
+.sem div span{font-size:11px;font-weight:600;white-space:nowrap}
+.sem div.auj{background:var(--an);color:var(--pa)}
+.sem div.f{color:var(--t2)}
+.feuille{margin-top:24px;padding:18px 20px 22px;background:var(--an);color:var(--pa);border-radius:16px 16px 0 0}
+.feuille .lab{color:var(--sc);margin-bottom:6px}
+.feuille a.app-l{display:flex;align-items:center;gap:14px;height:56px;border-bottom:1px solid rgba(246,240,227,.2);text-decoration:none;font-size:22px;font-weight:640;font-stretch:75%;text-transform:uppercase}
+.feuille a.app-l svg:first-child{width:17px;height:24px;color:var(--bo);flex:none}
+.feuille a.app-l svg:last-child{width:9px;height:15px;margin-left:auto;color:var(--bo)}
+.feuille .btn{margin-top:16px;border-color:var(--te)}
+.feuille .fin{margin-top:16px;font-size:12px;color:#A9A396}
+.vu{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.vu.la{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.seq{height:100vh}*{animation:none!important;transition:none!important}.vu{opacity:1;transform:none}.hero h1 span.m{opacity:1;transform:none}}
+.themes,.extrait{display:none}
+</style>
+</head>
+<body>
+<div class="app">
+
+<section class="seq" id="accueil"><div class="hero">
+  <img class="bg" src="img/enseigne-v.jpg" alt="Enseigne PapaLazzo, image de synthèse">
+  <div class="voile"></div>
+  <div class="haut"><img src="img/logo-papier.svg" alt="PapaLazzo"><div class="etat" data-etat><i></i><span>Ouvert</span></div></div>
+  <div class="bas" id="bas">
+    <p class="lab">Le Passage d’Agen</p>
+    <h1 class="t"><span class="m" style="animation-delay:.15s">Pizzeria</span> <span class="m acc" style="animation-delay:.3s">au</span> <span class="m" style="animation-delay:.45s">Passage</span> <span class="m" style="animation-delay:.6s">d’Agen</span></h1>
+    <div class="infos">
+      <a href="#avis"><svg class="ic" viewBox="0 0 22 22" aria-hidden="true"><path fill="currentColor" d="M11 1l3 6.6 7.1.8-5.3 4.8 1.5 7L11 16.6 4.7 20.2l1.5-7L.9 8.4 8 7.600z"/></svg><span><b>4,3</b> sur 5 · 966 avis Google</span></a>
+      <a href="#acces"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3L5 21M15 3l4 18M12 4v3M12 10.5v3M12 17v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>À 2 min de la sortie 7 de l’A62</span></a>
+    </div>
+  </div>
+</div></section>
+
+<section class="porte" id="porte" aria-label="La carte">
+  <div class="fixe">
+    <p class="lab">26 pizzas · 4 tailles</p>
+    <h2 class="t">La carte <span class="acc">complète</span></h2>
+    <p class="s">Prix à emporter</p>
+    <img class="pz2" id="pz2" src="img/p/02.webp" alt="">
+    <div class="vantail g"><div class="bois"></div><svg viewBox="-6 -6 275 187" aria-hidden="true" style="left:100%"><g fill="none" stroke="#445039" stroke-width="4.8" stroke-linecap="round"><path d="M0 175V40A40 40 0 0 1 80 40V175"/><path d="M16 175V8M32 175V1M48 175V1M64 175V8" stroke-width="2.2"/><path d="M91.5 175V40A40 40 0 0 1 171.5 40V175"/><path d="M107.5 175V8M123.5 175V1M139.5 175V1M155.5 175V8" stroke-width="2.2"/><path d="M183 175V40A40 40 0 0 1 263 40V175"/><path d="M199 175V8M215 175V1M231 175V1M247 175V8" stroke-width="2.2"/></g></svg><p class="indice" style="left:0;right:auto;width:200%">Faites défiler</p></div>
+    <div class="vantail d"><div class="bois"></div><svg viewBox="-6 -6 275 187" aria-hidden="true" style="left:0"><g fill="none" stroke="#445039" stroke-width="4.8" stroke-linecap="round"><path d="M0 175V40A40 40 0 0 1 80 40V175"/><path d="M16 175V8M32 175V1M48 175V1M64 175V8" stroke-width="2.2"/><path d="M91.5 175V40A40 40 0 0 1 171.5 40V175"/><path d="M107.5 175V8M123.5 175V1M139.5 175V1M155.5 175V8" stroke-width="2.2"/><path d="M183 175V40A40 40 0 0 1 263 40V175"/><path d="M199 175V8M215 175V1M231 175V1M247 175V8" stroke-width="2.2"/></g></svg><p class="indice" style="left:-100%;right:auto;width:200%">Faites défiler</p></div>
+  </div>
+</section>
+
+<section id="carte">
+  <div class="scene"><div class="pz" id="pizza"><img id="pzb" src="img/p/bt.webp" alt=""><img class="g" id="pzg" src="img/p/02.webp" alt="Pizza L’Agenaise, image de synthèse"></div>
+    <div class="choix"><p class="lab" id="c-lab"></p><h3 class="t" id="c-nom"></h3><p class="i" id="c-ing"></p><p class="t px" id="c-prix" aria-live="polite"></p></div>
+    <p class="mention">Image de synthèse</p></div>
+  <div class="tailles" id="tailles" role="group" aria-label="Taille"></div>
+  <div class="filtres" id="filtres" role="group" aria-label="Filtrer la carte"></div>
+  <ul class="liste" id="liste"></ul>
+</section>
+
+<section id="avis">
+  <div class="avis-tete">
+    <p class="lab">Les avis</p>
+    <div class="l"><p class="t note" id="note">0,0</p>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;padding-bottom:4px">
+        <div class="etoiles" id="etoiles" role="img" aria-label="4,3 étoiles sur 5"></div>
+        <p style="font-size:15px">966 avis Google</p>
+      </div></div>
+  </div>
+  <div class="barres" id="barres"><p class="lab">Les 140 derniers avis</p></div>
+  <div class="themes"><p class="lab">Ce que disent les clients</p><div id="themes"></div></div>
+  <div class="extrait"><p id="extrait"></p><p>[Prénom] · [mois et année] · avis Google</p></div>
+  <div class="deux">
+    <a class="btn p" href="https://www.google.com/maps/place/?q=place_id:ChIJ0W_2TD-0qxIRgTMlYsEZO3w">Laisser un avis</a>
+    <a class="btn" href="https://www.google.com/maps/place/?q=place_id:ChIJ0W_2TD-0qxIRgTMlYsEZO3w">Voir les avis</a>
+  </div>
+  <p class="src">Source : fiche Google, relevé du 13 novembre 2026.</p>
+</section>
+
+<section class="acces" id="acces">
+  <div class="acces-img"><img src="img/enseigne.jpg" alt="Façade PapaLazzo, image de synthèse"><svg viewBox="0 0 80 112" aria-hidden="true"><path d="M5 40A35 35 0 0 1 75 40V64L40 106L5 64Z" fill="#8C4A36" stroke="#F6F0E3" stroke-width="5" stroke-linejoin="round"/><path d="M26 32V64M40 24V78M54 32V64" fill="none" stroke="#F6F0E3" stroke-width="4.5" stroke-linecap="round"/></svg></div>
+  <div class="sec vu">
+    <p class="lab">Y aller</p>
+    <h2 class="t">Horaires <span class="acc">et</span> accès</h2>
+    <div class="lignes">
+      <p><svg viewBox="0 0 80 112" style="width:13px;height:18px;flex:none;margin:1px 2px 0" aria-hidden="true"><path d="M5 40A35 35 0 0 1 75 40V64L40 106L5 64Z" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/><path d="M28 30V66M40 22V80M52 30V66" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg><span>50 allée des Mousquetaires, 47520 Le Passage</span></p>
+      <p><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3L5 21M15 3l4 18M12 4v3M12 10.5v3M12 17v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>À 2 min de la sortie 7 de l’A62 · parking sur place</span></p>
+    </div>
+    <div class="sem-t"><p class="lab">Fermeture</p><div class="etat" data-etat><i></i><span>Ouvert</span></div></div>
+    <div class="sem" id="sem"></div>
+  </div>
+  <div class="feuille">
+    <p class="lab">Ouvrir l’itinéraire avec</p>
+    <div id="applis"></div>
+    <a class="btn p" href="tel:+33553872727">Appeler · 05 53 87 27 27</a>
+    <p class="fin">Prototype. Horaires de la fiche Google, à confirmer par le restaurant. Images de synthèse réalisées d’après le restaurant.</p>
+  </div>
+</section>
+
+<nav class="barre" aria-label="Actions">
+  <a class="btn p" href="https://shorturl.fulleapps.io/commandeweb-express">Commander</a>
+  <a class="btn" href="tel:+33553872727">Appeler</a>
+  <a class="btn" href="#acces"><svg viewBox="0 0 80 112" aria-hidden="true"><path d="M5 40A35 35 0 0 1 75 40V64L40 106L5 64Z" fill="none" stroke="currentColor" stroke-width="8" stroke-linejoin="round"/><path d="M28 30V66M40 22V80M52 30V66" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>Y aller</a>
+</nav>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
